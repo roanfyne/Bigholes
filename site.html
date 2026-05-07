@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rad Relativity</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+
+  <!-- KaTeX — LaTeX equation rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$',  right: '$',  display: false}
+      ],
+      throwOnError: false
+    })">
+  </script>
+  <style>
+
+  
+  :root {
+    --black:      #000;
+    --ink:        #070706;
+    --surface:    #0d0c0a;
+    --surface-hi: #141210;
+    --border:     #221e18;
+    --border-hi:  #3a3020;
+    /* warm accent palette */
+    --cyan:   #ffaa33;   /* main accent — warm amber    */
+    --violet: #ff6600;   /* secondary  — deep orange    */
+    --pink:   #ff3300;   /* tertiary   — warm red       */
+    --green:  #ffd700;   /* positive   — gold           */
+    --orange: #ff8800;
+    --yellow: #ffe066;
+    --white:  #ffffff;
+    --text:   #ede8df;
+    --muted:  #7a7060;
+    --dim:    #3a3020;
+    --serif:  'DM Sans', sans-serif;
+    --display:'Bebas Neue', sans-serif;
+    --mono:   'Share Tech Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--text); font-family: var(--serif); font-weight: 300; line-height: 1.75; overflow-x: hidden; }
+  ::-webkit-scrollbar { width: 2px; }
+  ::-webkit-scrollbar-thumb { background: var(--violet); }
+  ::selection { background: var(--violet); color: #000; }
+
+  /* ═══════════════════════════════════════════════════════════════
+     PAGE SYSTEM
+  ═══════════════════════════════════════════════════════════════ */
+  .page { display: none; min-height: 100vh; padding-top: 60px; }
+  .page.active { display: block; animation: fadeIn .35s ease; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+  /* ═══════════════════════════════════════════════════════════════
+     LAYOUT
+  ═══════════════════════════════════════════════════════════════ */
+  .wrap    { width: min(1100px, 92vw); margin: 0 auto; }
+  .wrap-sm { width: min(740px,  92vw); margin: 0 auto; }
+  .wrap-lg { width: min(1340px, 96vw); margin: 0 auto; }
+  .row     { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .row-3   { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
+  .row-4   { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; }
+  .row-rev { direction: rtl; }
+  .row-rev > * { direction: ltr; }
+  section { padding: 6rem 0; }
+  section.tight { padding: 3.5rem 0; }
+  section.flush { padding: 0; }
+
+  /* ═══════════════════════════════════════════════════════════════
+     SPECTRUM / FIRE GRADIENT
+  ═══════════════════════════════════════════════════════════════ */
+  .spectrum {
+    background: linear-gradient(90deg, #ff2200, #ff5500, #ff8800, #ffaa33, #ffd700, #fff5cc, #ffd700, #ffaa33, #ff8800, #ff5500, #ff2200);
+    background-size: 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: specMove 9s linear infinite;
+  }
+  @keyframes specMove { to { background-position: 300%; } }
+  .spec-line {
+    height: 1px;
+    background: linear-gradient(90deg, #ff2200, #ff6600, #ffaa33, #ffd700, #ffaa33, #ff6600, #ff2200);
+    background-size: 200%;
+    animation: specMove 5s linear infinite;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     TYPOGRAPHY
+  ═══════════════════════════════════════════════════════════════ */
+  h1, h2, h3, h4 { font-family: var(--display); letter-spacing: .03em; line-height: .95; font-weight: 400; }
+  .kicker { font-family:var(--mono); font-size:.6rem; letter-spacing:.22em; text-transform:uppercase; color:var(--cyan); display:block; margin-bottom:.75rem; }
+  .overline { font-family:var(--mono); font-size:.6rem; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); display:block; margin-bottom:.4rem; }
+  p { color: var(--muted); font-size: .95rem; line-height: 1.85; }
+  p + p { margin-top: 1rem; }
+  .body-lg { font-size: 1.05rem; line-height: 1.9; }
+  .body-sm { font-size: .85rem; }
+  blockquote { border-left: 2px solid var(--violet); padding: .75rem 0 .75rem 1.5rem; margin: 1.5rem 0; font-style: italic; font-size: 1rem; color: var(--text); line-height: 1.75; }
+  blockquote cite { display:block; margin-top:.5rem; font-family:var(--mono); font-size:.62rem; letter-spacing:.15em; text-transform:uppercase; color:var(--muted); font-style:normal; }
+
+  /* ═══════════════════════════════════════════════════════════════
+     NAV
+  ═══════════════════════════════════════════════════════════════ */
+  nav { position:fixed; top:0; left:0; right:0; z-index:500; height:60px; display:flex; align-items:center; justify-content:space-between; padding:0 2.5rem; background:rgba(0,0,0,.94); border-bottom:1px solid var(--border); backdrop-filter:blur(10px); transition:border-color .3s; }
+  .nav-logo { font-family:var(--display); font-size:1.35rem; letter-spacing:.1em; color:var(--text); cursor:pointer; user-select:none; }
+  .nav-logo em { color:var(--cyan); font-style:normal; }
+  .nav-menu { display:flex; gap:0; list-style:none; }
+  .nav-menu button { font-family:var(--mono); font-size:.62rem; letter-spacing:.16em; text-transform:uppercase; padding:.4rem 1rem; background:none; border:none; border-right:1px solid var(--border); color:var(--muted); cursor:pointer; transition:color .2s; white-space:nowrap; }
+  .nav-menu li:first-child button { border-left:1px solid var(--border); }
+  .nav-menu button:hover  { color:var(--text); }
+  .nav-menu button.active { color:var(--cyan); }
+
+  /* ═══════════════════════════════════════════════════════════════
+     PAGE HEADER
+  ═══════════════════════════════════════════════════════════════ */
+  .pg-header { background:var(--ink); border-bottom:1px solid var(--border); padding:3.5rem 0 3rem; }
+  .pg-header .trail { font-family:var(--mono); font-size:.58rem; letter-spacing:.2em; text-transform:uppercase; color:var(--dim); margin-bottom:1.25rem; }
+  .pg-header .trail span { color:var(--cyan); }
+  .pg-header h1 { font-size:clamp(3rem,6vw,5.5rem); margin-bottom:1rem; }
+  .pg-header p { max-width:560px; }
+
+  /* ═══════════════════════════════════════════════════════════════
+     IMAGE SLOTS
+  ═══════════════════════════════════════════════════════════════ */
+  .img-slot { position:relative; background:var(--surface); border:1px solid var(--border); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.5rem; overflow:hidden; }
+  .img-slot::before { content:''; position:absolute; top:0; left:0; width:14px; height:14px; border-top:1px solid var(--cyan); border-left:1px solid var(--cyan); }
+  .img-slot::after  { content:''; position:absolute; bottom:0; right:0; width:14px; height:14px; border-bottom:1px solid var(--cyan); border-right:1px solid var(--cyan); }
+  .img-slot .img-label { font-family:var(--mono); font-size:.58rem; letter-spacing:.2em; text-transform:uppercase; color:var(--dim); text-align:center; padding:0 1rem; }
+  .img-slot .img-hint  { font-size:.75rem; color:var(--dim); text-align:center; padding:0 1.5rem; }
+  .img-16-9 { aspect-ratio:16/9; }  .img-4-3 { aspect-ratio:4/3; }
+  .img-1-1  { aspect-ratio:1; }     .img-3-4 { aspect-ratio:3/4; }
+  .img-2-1  { aspect-ratio:2/1; }   .img-wide { aspect-ratio:21/9; }
+  .img-slot img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
+  .img-caption { font-family:var(--mono); font-size:.6rem; letter-spacing:.12em; color:var(--dim); margin-top:.6rem; line-height:1.5; }
+
+  /* ═══════════════════════════════════════════════════════════════
+     CARDS
+  ═══════════════════════════════════════════════════════════════ */
+  .card { background:var(--ink); border:1px solid var(--border); padding:2rem; }
+  .card h3 { font-size:clamp(1.4rem,2.5vw,2rem); margin-bottom:.75rem; }
+  .card .card-num { font-family:var(--mono); font-size:.6rem; letter-spacing:.2em; color:var(--dim); margin-bottom:.5rem; display:block; }
+  .card-lift { transition:border-color .2s, transform .2s; cursor:default; position:relative; }
+  .card-lift::before { content:''; position:absolute; top:-1px; left:-1px; right:-1px; height:2px; background:transparent; transition:background .25s; }
+  .card-lift:hover { border-color:var(--border-hi); transform:translateY(-2px); }
+  .card-lift:hover::before { background:var(--cyan); }
+
+  /* ═══════════════════════════════════════════════════════════════
+     FACT ROWS / TABLES
+  ═══════════════════════════════════════════════════════════════ */
+  .fact-table { margin-top:1.5rem; }
+  .fact-row { display:flex; justify-content:space-between; align-items:baseline; padding:.55rem 0; border-bottom:1px solid var(--border); gap:1rem; }
+  .fact-row:last-child { border-bottom:none; }
+  .fact-key { font-family:var(--mono); font-size:.6rem; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); flex-shrink:0; }
+  .fact-val { font-family:var(--mono); font-size:.72rem; color:var(--text); text-align:right; }
+  .fact-val.accent { color:var(--cyan); }
+  .pull-stat { padding:2rem 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .pull-stat-num { font-family:var(--display); font-size:clamp(3rem,7vw,5.5rem); line-height:1; letter-spacing:.03em; margin-bottom:.35rem; }
+  .pull-stat-label { font-family:var(--mono); font-size:.6rem; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); }
+
+  /* ═══════════════════════════════════════════════════════════════
+     TAGS / BUTTONS
+  ═══════════════════════════════════════════════════════════════ */
+  .tag { font-family:var(--mono); font-size:.55rem; letter-spacing:.18em; text-transform:uppercase; padding:.18rem .55rem; border:1px solid var(--border-hi); color:var(--muted); display:inline-block; margin:0 .3rem .4rem 0; }
+  .tag-cyan   { border-color:var(--cyan);   color:var(--cyan); }
+  .tag-violet { border-color:var(--violet); color:var(--violet); }
+  .tag-pink   { border-color:var(--pink);   color:var(--pink); }
+  .tag-green  { border-color:var(--green);  color:var(--green); }
+  .btn { font-family:var(--mono); font-size:.65rem; letter-spacing:.14em; text-transform:uppercase; padding:.75rem 1.8rem; border:none; cursor:pointer; text-decoration:none; display:inline-block; transition:.2s; }
+  .btn-filled  { background:var(--cyan); color:#000; }
+  .btn-filled:hover  { opacity:.85; }
+  .btn-hollow  { background:transparent; border:1px solid var(--border-hi); color:var(--muted); }
+  .btn-hollow:hover  { border-color:var(--cyan); color:var(--cyan); }
+
+  /* ═══════════════════════════════════════════════════════════════
+     LISTS
+  ═══════════════════════════════════════════════════════════════ */
+  .rule { border:none; border-top:1px solid var(--border); margin:3rem 0; }
+  .num-list { list-style:none; counter-reset:n; margin-top:1rem; }
+  .num-list li { counter-increment:n; display:flex; gap:1rem; padding:.7rem 0; border-bottom:1px solid var(--border); font-size:.9rem; color:var(--muted); line-height:1.7; }
+  .num-list li::before { content:counter(n,decimal-leading-zero); font-family:var(--mono); font-size:.6rem; color:var(--cyan); flex-shrink:0; padding-top:.15rem; letter-spacing:.1em; }
+  .dot-list { list-style:none; margin-top:1rem; }
+  .dot-list li { display:flex; align-items:flex-start; gap:.75rem; padding:.55rem 0; border-bottom:1px solid var(--border); font-size:.9rem; color:var(--muted); line-height:1.7; }
+  .dot-list li::before { content:''; display:inline-block; width:5px; height:5px; background:var(--cyan); flex-shrink:0; margin-top:.55rem; }
+  .dot-list.v li::before { background:var(--violet); }
+  .dot-list.p li::before { background:var(--pink); }
+
+  /* ═══════════════════════════════════════════════════════════════
+     TIMELINE
+  ═══════════════════════════════════════════════════════════════ */
+  .timeline { position:relative; padding-left:2.5rem; }
+  .timeline::before { content:''; position:absolute; left:0; top:0; bottom:0; width:1px; background:linear-gradient(to bottom, var(--violet), var(--cyan), transparent); }
+  .tl-item { position:relative; padding-left:1.5rem; margin-bottom:2.5rem; }
+  .tl-item::before { content:''; position:absolute; left:-2px; top:7px; width:5px; height:5px; background:var(--cyan); }
+  .tl-year  { font-family:var(--mono); font-size:.6rem; letter-spacing:.2em; color:var(--violet); margin-bottom:.2rem; }
+  .tl-title { font-family:var(--display); font-size:1.3rem; letter-spacing:.04em; margin-bottom:.4rem; }
+  .tl-body  { font-size:.88rem; color:var(--muted); line-height:1.8; }
+
+  /* ═══════════════════════════════════════════════════════════════
+     DATA TABLE
+  ═══════════════════════════════════════════════════════════════ */
+  .data-table { width:100%; border-collapse:collapse; }
+  .data-table th { font-family:var(--mono); font-size:.57rem; letter-spacing:.18em; text-transform:uppercase; color:var(--dim); padding:.65rem 1rem; text-align:left; border-bottom:1px solid var(--border); }
+  .data-table td { padding:.85rem 1rem; border-bottom:1px solid var(--border); font-family:var(--mono); font-size:.7rem; color:var(--muted); }
+  .data-table tr:hover td { background:var(--surface); color:var(--text); }
+  .data-table .hl { color:var(--cyan); }
+
+  /* ═══════════════════════════════════════════════════════════════
+     BACKGROUNDS
+  ═══════════════════════════════════════════════════════════════ */
+  .bg-black   { background: var(--black); }
+  .bg-ink     { background: var(--ink); }
+  .bg-surface { background: var(--surface); }
+
+  /* ═══════════════════════════════════════════════════════════════
+     HERO
+  ═══════════════════════════════════════════════════════════════ */
+  .hero { min-height:calc(100vh - 60px); display:flex; flex-direction:column; justify-content:flex-end; padding-bottom:5rem; position:relative; overflow:hidden; }
+  .hero-bg { position:absolute; inset:0; background:var(--black); z-index:0; }
+  .hero-bg img { width:100%; height:100%; object-fit:cover; opacity:.35; display:block; }
+  .hero-bg-placeholder {
+    position:absolute; inset:0; z-index:0;
+    background: radial-gradient(ellipse at 60% 40%, rgba(255,130,20,.10) 0%, transparent 65%),
+                radial-gradient(ellipse at 40% 70%, rgba(255,170,50,.06) 0%, transparent 55%),
+                var(--black);
+  }
+  .hero-rings { position:absolute; top:50%; left:55%; transform:translate(-50%,-50%); width:min(680px,100vw); height:min(680px,100vw); pointer-events:none; z-index:0; opacity:.7; }
+  .ring { transform-origin:center; }
+  .ring-1 { animation:spin 38s linear infinite; }
+  .ring-2 { animation:spin 55s linear infinite reverse; }
+  .ring-3 { animation:spin 22s linear infinite; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  .hero-content { position:relative; z-index:1; }
+  .hero-eyebrow { font-family:var(--mono); font-size:.62rem; letter-spacing:.25em; text-transform:uppercase; color:var(--muted); margin-bottom:1.2rem; display:flex; align-items:center; gap:.75rem; }
+  .hero-eyebrow::before { content:''; display:block; width:28px; height:1px; background:var(--muted); }
+  .hero h1 { font-size:clamp(5rem,13vw,11rem); line-height:.9; margin-bottom:1.5rem; }
+  .hero-sub { font-size:1rem; color:var(--muted); max-width:440px; line-height:1.8; margin-bottom:2.5rem; }
+  .hero-meta { display:flex; gap:2.5rem; flex-wrap:wrap; border-top:1px solid var(--border); padding-top:1.5rem; margin-top:1rem; }
+  .hero-meta-item .label { font-family:var(--mono); font-size:.55rem; letter-spacing:.2em; text-transform:uppercase; color:var(--dim); display:block; margin-bottom:.15rem; }
+  .hero-meta-item .value { font-family:var(--display); font-size:1.6rem; letter-spacing:.04em; line-height:1; }
+
+  /* ═══════════════════════════════════════════════════════════════
+     WHITE SECTION (learn page "The Hole" segment)
+     Smooth gradient transition in/out from pure black to white
+  ═══════════════════════════════════════════════════════════════ */
+  .white-section {
+    background: linear-gradient(to bottom,
+      #000 0%,
+      #111 4%,
+      #ffffff 10%,
+      #ffffff 90%,
+      #111 96%,
+      #000 100%
+    );
+    padding: 10rem 0;
+    position: relative;
+  }
+  .white-inner {
+    max-width: min(720px, 92vw);
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  .white-inner h2 { color: #000; font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 1.25rem; }
+  .white-inner h3 { color: #111; font-size: 1.5rem; margin-bottom: .75rem; font-family: var(--display); letter-spacing: .04em; }
+  .white-inner p { color: #3a3a3a; }
+  .white-inner .kicker { color: #b36b00; }
+  .white-inner .rule { border-color: #ddd; }
+  .white-inner blockquote { border-left-color: #9b40ff; color: #111; }
+  .white-inner blockquote cite { color: #888; }
+  /* Neon highlights on white bg — slightly desaturated to stay readable */
+  .hl-cyan   { color: #007a88; font-weight: 500; }  /* teal on white */
+  .hl-violet { color: #7700cc; font-weight: 500; }  /* purple on white */
+  .hl-pink   { color: #cc0044; font-weight: 500; }  /* deep pink on white */
+  .hl-orange { color: #cc5500; font-weight: 500; }  /* burnt orange on white */
+  .hl-gold   { color: #a07800; font-weight: 500; }  /* dark gold on white */
+
+  /* ═══════════════════════════════════════════════════════════════
+     FOOTER
+  ═══════════════════════════════════════════════════════════════ */
+  footer { background:var(--ink); border-top:1px solid var(--border); padding:2.5rem 0 2rem; }
+  .footer-inner { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.5rem; }
+  .footer-logo { font-family:var(--display); font-size:1.4rem; letter-spacing:.1em; }
+  .footer-logo em { color:var(--cyan); font-style:normal; }
+  .footer-nav { display:flex; gap:0; list-style:none; }
+  .footer-nav button { font-family:var(--mono); font-size:.58rem; letter-spacing:.15em; text-transform:uppercase; color:var(--dim); background:none; border:none; border-right:1px solid var(--border); padding:0 1rem; cursor:pointer; transition:color .2s; }
+  .footer-nav li:first-child button { border-left:1px solid var(--border); }
+  .footer-nav button:hover { color:var(--cyan); }
+  .footer-bottom { border-top:1px solid var(--border); margin-top:2rem; padding-top:1.25rem; display:flex; justify-content:space-between; align-items:center; }
+  .footer-copy { font-family:var(--mono); font-size:.58rem; letter-spacing:.15em; color:var(--dim); }
+  .spec-line-footer { width:80px; }
+
+  /* ═══════════════════════════════════════════════════════════════
+     SECRET SIMULATOR MODAL
+  ═══════════════════════════════════════════════════════════════ */
+  .bh-modal-overlay {
+    display: none; position:fixed; inset:0; z-index:2000;
+    background: rgba(0,0,0,.97);
+    align-items:center; justify-content:center;
+    flex-direction: column;
+  }
+  .bh-modal-overlay.open { display:flex; animation: fadeIn .4s ease; }
+  .bh-modal-close {
+    position:absolute; top:1.5rem; right:2rem;
+    font-family:var(--mono); font-size:.65rem; letter-spacing:.15em;
+    text-transform:uppercase; color:var(--muted);
+    background:none; border:none; cursor:pointer;
+    transition:color .2s;
+  }
+  .bh-modal-close:hover { color:var(--cyan); }
+  #bh-sim-canvas {
+    display:block;
+    width: min(700px, 92vw);
+    height: min(700px, 92vw);
+    border: 1px solid var(--border);
+  }
+  .bh-sim-label {
+    font-family:var(--mono); font-size:.58rem; letter-spacing:.2em;
+    text-transform:uppercase; color:var(--dim); margin-top:1rem;
+    text-align:center;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     RESPONSIVE
+  ═══════════════════════════════════════════════════════════════ */
+  @media (max-width: 900px) {
+    nav { padding: 0 1.2rem; }
+    .nav-menu { display: none; }
+    .row, .row-3, .row-4 { grid-template-columns: 1fr; gap: 2.5rem; }
+    .hero h1 { font-size: clamp(3.5rem,16vw,7rem); }
+    .hero-rings { left:50%; opacity:.3; }
+    .footer-inner { flex-direction:column; align-items:flex-start; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     KATEX — equation styling
+  ═══════════════════════════════════════════════════════════════ */
+  /* Block display equations — centred, spaced, amber accent line */
+  .katex-display {
+    margin: 2rem 0;
+    padding: 1.5rem 2rem;
+    background: var(--surface);
+    border-left: 2px solid var(--cyan);
+    overflow-x: auto;
+  }
+  /* Override KaTeX default white colour to match our text */
+  .katex { color: var(--text); font-size: 1.05em; }
+  /* Inline math — nudge spacing slightly */
+  .katex-inline { color: var(--cyan); }
+
+  /* equation label row — number + description under a block eq */
+  .eq-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: .4rem 2rem .2rem;
+    margin-top: -.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .eq-num   { font-family: var(--mono); font-size: .58rem; letter-spacing: .18em; color: var(--dim); }
+  .eq-label { font-family: var(--mono); font-size: .6rem;  letter-spacing: .12em; color: var(--muted); text-align: right; max-width: 60%; }
+
+  /* on the white section, equations need dark text */
+  .white-inner .katex { color: #111; }
+  .white-inner .katex-display { background: #f4f4f4; border-left-color: #7700cc; }
+
+  /* ═══════════════════════════════════════════════════════════════
+     SCROLL REVEAL
+  ═══════════════════════════════════════════════════════════════ */
+  .reveal { opacity:0; transform:translateY(20px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity:1; transform:none; }
+  .reveal.d1 { transition-delay:.08s; }
+  .reveal.d2 { transition-delay:.16s; }
+  .reveal.d3 { transition-delay:.24s; }
+
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     NAV
+═══════════════════════════════════════════════════════════════ -->
+<nav>
+  <span class="nav-logo" onclick="go('home')">RAD <em>R</em>ELATIVITY</span>
+  <ul class="nav-menu" id="nav">
+    <li><button onclick="go('home')"    data-p="home"    class="active">Home</button></li>
+    <li><button onclick="go('rele')" data-p="explore">Reletivity</button></li>
+    <li><button onclick="go('types')"   data-p="types">Types</button></li>
+    <li><button onclick="go('learn')"   data-p="learn">Learn</button></li>
+    <li><button onclick="go('data')"    data-p="data">Data</button></li>
+  </ul>
+</nav>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     HOME
+═══════════════════════════════════════════════════════════════ -->
+<div id="page-home" class="page active">
+
+  <div class="hero">
+    <div class="hero-bg-placeholder"></div>
+
+
+    <svg class="hero-rings" viewBox="0 0 680 680" fill="none">
+      <defs>
+        <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%"  stop-color="#000" stop-opacity="1"/>
+          <stop offset="40%" stop-color="#000" stop-opacity="1"/>
+          <stop offset="65%" stop-color="#3a1800" stop-opacity=".8"/>
+          <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <!-- rangs -->
+      <g class="ring ring-1">
+        <ellipse cx="340" cy="340" rx="285" ry="112" stroke="rgba(255,140,20,.10)" stroke-width="1.5"/>
+      </g>
+      <g class="ring ring-2">
+        <ellipse cx="340" cy="340" rx="245" ry="94"  stroke="rgba(255,210,60,.07)"  stroke-width="1"/>
+      </g>
+      <g class="ring ring-3">
+        <ellipse cx="340" cy="340" rx="205" ry="78"  stroke="rgba(255,80,0,.06)"   stroke-width="1"/>
+      </g>
+     
+      <circle cx="340" cy="340" r="88"  stroke="rgba(255,150,30,.18)" stroke-width="1.5"/>
+      <circle cx="340" cy="340" r="74"  stroke="rgba(255,200,80,.10)" stroke-width="1"/>
+ 
+      <ellipse cx="340" cy="340" rx="160" ry="40" fill="none" stroke="rgba(255,120,10,.12)" stroke-width="8"/>
+   
+      <circle cx="340" cy="340" r="54"  fill="url(#coreGlow)"/>
+      <circle cx="340" cy="340" r="36"  fill="#000"/>
+ 
+      <circle cx="110" cy="75"  r="1"   fill="rgba(255,240,200,.3)"/>
+      <circle cx="580" cy="120" r=".8"  fill="rgba(255,235,180,.25)"/>
+      <circle cx="620" cy="565" r="1.2" fill="rgba(255,240,200,.3)"/>
+      <circle cx="80"  cy="590" r=".7"  fill="rgba(255,230,170,.2)"/>
+      <circle cx="490" cy="62"  r=".9"  fill="rgba(255,245,210,.28)"/>
+      <circle cx="648" cy="345" r="1"   fill="rgba(255,240,200,.2)"/>
+      <circle cx="60"  cy="295" r=".7"  fill="rgba(255,235,180,.18)"/>
+    </svg>
+
+    <div class="hero-content wrap">
+      <p class="hero-eyebrow">ur mom — 2026</p>
+      <h1 class="spectrum">BLACK<br>HOLES</h1>
+      <p class="hero-sub">def of a bAlCK HOLE.</p>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2rem">
+        <button class="btn btn-filled"  onclick="go('rele')">Start Learning</button>
+        <button class="btn btn-hollow"  onclick="go('learn')">Read the science</button>
+      </div>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <span class="label">Est. black holes</span>
+          <span class="value" style="color:var(--cyan)">10⁸</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="label">First photographed</span>
+          <span class="value">2019</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="label">Largest known</span>
+          <span class="value">TON 618</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="label">Escape velocity</span>
+          <span class="value" style="color:var(--violet)">c</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <section class="bg-ink">
+    <div class="wrap">
+      <div class="row reveal">
+        <div>
+          <div class="img-slot img-4-3">
+            <span class="img-label">Replace with image — 4:3</span>
+            <span class="img-hint">e.g. EHT image, artist render, accretion disk</span>
+          </div>
+          <p class="img-caption">Figure 1 — Caption text goes here.</p>
+        </div>
+        <div>
+          <span class="kicker">Introduction</span>
+          <h2 style="font-size:clamp(2.5rem,5vw,4.5rem);margin-bottom:1.25rem">WHAT IS A<br>BLACK HOLE?</h2>
+          <p class="body-lg">A black hole is a region of spacetime where gravity is so overwhelming that nothing — not even light — can escape once it crosses the boundary known as the event horizon.</p>
+          <p>They are not empty voids. They contain enormous amounts of mass compressed into an incredibly small space, bending spacetime so severely that our ordinary physics breaks down at the centre.</p>
+          <p>Predicted by Einstein's general theory of relativity in 1916 and first directly photographed in 2019, black holes remain one of the most actively studied objects in all of astrophysics.</p>
+          <ul class="dot-list" style="margin-top:1.5rem">
+            <li>Governed entirely by Einstein's general theory of relativity</li>
+            <li>Detected via gravitational waves, X-ray emissions, and light bending</li>
+            <li>First photographed by the Event Horizon Telescope in 2019</li>
+            <li>Predicted to slowly evaporate over cosmic timescales via Hawking radiation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THREE CARDS -->
+  <section class="bg-black" style="padding:4rem 0">
+    <div class="wrap">
+      <div class="row-3">
+        <div class="card card-lift reveal" onclick="go('rele')" style="cursor:pointer">
+          <span class="card-num">01</span>
+          <span class="kicker">Words</span>
+          <h3>Reletivity</h3>
+          <p class="body-sm">Spend some time learning about Reletivity</p>
+        </div>
+        <div class="card card-lift reveal d1" onclick="go('types')" style="cursor:pointer">
+          <span class="card-num">02</span>
+          <span class="kicker">Classification</span>
+          <h3>Types</h3>
+          <p class="body-sm">From stellar remnants a few times the Sun's mass to supermassive giants 66 billion times larger. Four classes, four stories.</p>
+        </div>
+        <div class="card card-lift reveal d2" onclick="go('learn')" style="cursor:pointer">
+          <span class="card-num">03</span>
+          <span class="kicker">Education</span>
+          <h3>Learn</h3>
+          <p class="body-sm">The full history from 1783 to today, key physics explained plainly, and a deep reference section.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE BAND -->
+  <section class="bg-surface" style="padding:5rem 0">
+    <div class="wrap-sm">
+      <div class="reveal" style="text-align:center">
+        <span class="kicker" style="text-align:center;display:block;margin-bottom:1.5rem">In their own words</span>
+        <blockquote style="border-left:none;padding:0;font-size:clamp(1.1rem,2.5vw,1.6rem);text-align:center;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:2rem 0;font-style:italic;color:var(--text)">
+          "Black holes are where God divided by zero."
+          <cite style="margin-top:1rem">— Steven Wright</cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- WIDE IMAGE -->
+  <section class="flush">
+    <div class="wrap-lg">
+      <div class="img-slot img-wide reveal">
+        <span class="img-label">Full-width feature image — 21:9 panoramic</span>
+        <span class="img-hint">Works well with: EHT M87* image, galaxy core, accretion disk panorama</span>
+      </div>
+      <p class="img-caption" style="padding:0 2vw .5rem">Figure 2 — Full-width caption. Good place for a dramatic wide image.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-inner">
+        <div class="footer-logo">RAD <em>R</em>ELATIVITY</div>
+        <ul class="footer-nav">
+          <li><button onclick="go('home')">Home</button></li>
+          <li><button onclick="go('rele')">Reletivity</button></li>
+          <li><button onclick="go('types')">Types</button></li>
+          <li><button onclick="go('learn')">Learn</button></li>
+          <li><button onclick="go('data')">Data</button></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2025 RAD RELATIVITY — Black Hole Research</span>
+        <div class="spec-line spec-line-footer"></div>
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /home -->
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     reletivity
+═══════════════════════════════════════════════════════════════ -->
+<div id="page-explore" class="page">
+
+  <div class="pg-header bg-ink">
+    <div class="wrap">
+      <p class="trail">Rad Relativity / <span>Reletivity/span></p>
+      <h1>Lets look at<br>Some Reletivity</h1>
+      <p>stuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuff</p>
+    </div>
+  </div>
+
+  <!-- ACCRETION DISK -->
+  <section class="bg-black">
+    <div class="wrap">
+      <div class="row reveal">
+        <div>
+          <span class="overline">stuffstuffstuffstuff</span>
+          <span class="kicker">stuffstuffstuffstuff</span>
+          <h2 style="font-size:clamp(2.5rem,5vw,4rem);margin-bottom:1rem">THE GLOWING<br>SPIRAL</h2>
+          <p>stuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuff</p>
+          <p>stuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuffstuff</p>
+          <div class="fact-table" style="margin-top:1.5rem">
+            <div class="fact-row"><span class="fact-key">Temperature</span><span class="fact-val accent">Up to ~10⁷ K</span></div>
+            <div class="fact-row"><span class="fact-key">Composition</span><span class="fact-val">Gas, dust, plasma</span></div>
+            <div class="fact-row"><span class="fact-key">Luminosity</span><span class="fact-val">&gt; 10⁴⁰ watts</span></div>
+            <div class="fact-row"><span class="fact-key">Role</span><span class="fact-val">How black holes grow</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="img-slot img-1-1">
+            <span class="img-label">Accretion disk — 1:1</span>
+            <span class="img-hint">Suggest: artist render or simulation of accretion disk</span>
+          </div>
+          <p class="img-caption">Fig. 3 — Accretion disk caption.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTON SPHERE -->
+  <section class="bg-ink">
+    <div class="wrap">
+      <div class="row row-rev reveal">
+        <div>
+          <span class="overline">Layer 03</span>
+          <span class="kicker">Photon Sphere</span>
+          <h2 style="font-size:clamp(2.5rem,5vw,4rem);margin-bottom:1rem">WHERE LIGHT<br>ORBITS FOREVER</h2>
+          <p>At 1.5 times the Schwarzschild radius, gravity becomes strong enough to bend light into a perfect circular orbit. Photons here loop endlessly — though the orbit is unstable. The slightest perturbation sends them spiralling inward or escaping outward.</p>
+          <p>The photon sphere is responsible for the distinctive bright ring seen in photographs of black holes. The dark central region — the "shadow" — is bounded by light trapped in these circular orbits.</p>
+          <div class="fact-table" style="margin-top:1.5rem">
+            <div class="fact-row"><span class="fact-key">Radius formula</span><span class="fact-val accent">r = 3GM/c²</span></div>
+            <div class="fact-row"><span class="fact-key">Orbit stability</span><span class="fact-val">Unstable</span></div>
+            <div class="fact-row"><span class="fact-key">Speed of photons</span><span class="fact-val">c (speed of light)</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="img-slot img-1-1">
+            <span class="img-label">Photon sphere / shadow — 1:1</span>
+            <span class="img-hint">Suggest: EHT image of M87* or Sgr A*</span>
+          </div>
+          <p class="img-caption">Fig. 4 — Photon sphere caption.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENT HORIZON -->
+  <section class="bg-black">
+    <div class="wrap">
+      <div class="row reveal">
+        <div>
+          <span class="overline">Layer 02</span>
+          <span class="kicker">Event Horizon</span>
+          <h2 style="font-size:clamp(2.5rem,5vw,4rem);margin-bottom:1rem">THE POINT OF<br>NO RETURN</h2>
+          <p>The event horizon is not a physical surface — it is a mathematical boundary in space. Any object that crosses it would need to travel faster than light to escape. Since nothing can do that, nothing ever leaves.</p>
+          <p>Paradoxically, crossing the event horizon of a large enough black hole would feel completely ordinary. No wall, no alarm. You would only discover you had crossed it if you tried to turn back — and found you couldn't.</p>
+          <div class="pull-stat" style="margin-top:2rem">
+            <div class="pull-stat-num" style="color:var(--cyan)">2GM/c²</div>
+            <div class="pull-stat-label">Schwarzschild radius — the size of the event horizon</div>
+          </div>
+        </div>
+        <div>
+          <div class="img-slot img-4-3">
+            <span class="img-label">Event horizon — 4:3</span>
+            <span class="img-hint">Suggest: diagram, infographic, or artistic cross-section</span>
+          </div>
+          <p class="img-caption">Fig. 5 — Event horizon caption.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SINGULARITY -->
+  <section class="bg-ink">
+    <div class="wrap">
+      <div class="row row-rev reveal">
+        <div>
+          <span class="overline">Layer 01 — Innermost</span>
+          <span class="kicker">The Singularity</span>
+          <h2 style="font-size:clamp(2.5rem,5vw,4rem);margin-bottom:1rem">WHERE PHYSICS<br>BREAKS DOWN</h2>
+          <p>At the absolute centre lies the singularity — a point of theoretically infinite density and zero volume. Our equations of physics completely break down here. They simply cannot describe what exists.</p>
+          <p>The singularity is not a "thing" you could observe even in principle. It is the edge of our knowledge — the place where a new theory of quantum gravity will need to take over. What actually happens at the centre of a black hole remains one of the deepest unsolved problems in all of science.</p>
+          <blockquote>
+            "The centre of a black hole is where the laws of physics as we know them cease to hold."
+            <cite>— Kip Thorne, physicist</cite>
+          </blockquote>
+        </div>
+        <div>
+          <div class="img-slot img-1-1">
+            <span class="img-label">Singularity — 1:1</span>
+            <span class="img-hint">Suggest: abstract art, spacetime curvature diagram</span>
+          </div>
+          <p class="img-caption">Fig. 6 — Singularity caption.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-inner">
+        <div class="footer-logo">RAD <em>R</em>ELATIVITY</div>
+        <ul class="footer-nav">
+          <li><button onclick="go('home')">Home</button></li>
+          <li><button onclick="go('explore')">rele</button></li>
+          <li><button onclick="go('types')">Types</button></li>
+          <li><button onclick="go('learn')">Learn</button></li>
+          <li><button onclick="go('data')">Data</button></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2025 RAD RELATIVITY — Black Hole Research</span>
+        <div class="spec-line spec-line-footer"></div>
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /explore -->
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     TYPES
+═══════════════════════════════════════════════════════════════ -->
+<div id="page-types" class="page">
+
+  <div class="pg-header bg-ink">
+    <div class="wrap">
+      <p class="trail">Rad Relativity / <span>Types</span></p>
+      <h1>FOUR KINDS<br>OF NOTHING</h1>
+      <p>Not all black holes are alike. They range from a few times the mass of the Sun to tens of billions — each class forming differently and reshaping the universe around them in different ways.</p>
+    </div>
+  </div>
+
+  <!-- STELLAR -->
+  <section class="bg-black">
+    <div class="wrap">
+      <div class="row reveal">
+        <div>
+          <div style="margin-bottom:1rem"><span class="tag tag-cyan">Most common</span><span class="tag">3–20 M☉</span><span class="tag">Stellar remnant</span></div>
+          <span class="kicker">Type 01</span>
+          <h2 style="font-size:clamp(2.5rem,5vw,4.5rem);margin-bottom:1rem">STELLAR<br>BLACK HOLES</h2>
+          <p>Formed when a massive star — typically at least 20 times the mass of our Sun — exhausts its nuclear fuel. The outward radiation pressure collapses, and if the remaining core exceeds roughly 3 solar masses, no known force can prevent the collapse into a black hole.</p>
+          <p style="margin-top:1rem">The Milky Way is estimated to contain around 100 million stellar black holes, most completely invisible since they emit no light and have no companion star to pull matter from.</p>
+          <ul class="num-list">
+            <li>Cygnus X-1 — ~21 solar masses, first confirmed stellar black hole (1971)</li>
+            <li>V404 Cygni — ~9 solar masses, the most active X-ray binary in the Milky Way</li>
+            <li>GW150914 — merger of two, producing a 62 solar mass remnant detected by LIGO</li>
+          </ul>
+          <div class="fact-table" style="margin-top:1.5rem">
+            <div class="fact-row"><span class="fact-key">Mass range</span><span class="fact-val accent">3–20 M☉</span></div>
+            <div class="fact-row"><span class="fact-key">Approx. radius</span><span class="fact-val">9–60 km</span></div>
+            <div class="fact-row"><span class="fact-key">Formation</span><span class="fact-val">Supernova collapse</span></div>
+            <div class="fact-row"><span class="fact-key">Milky Way count</span><span class="fact-val">~100 million</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="img-slot img-4-3">
+            <span class="img-label">Stellar black hole — 4:3</span>
+            <span class="img-hint">Suggest: X-ray binary render, Cygnus X-1, supernova remnant</span>
+          </div>
+          <p class="img-caption">Fig. 7 — Stellar black hole caption.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUPERMASSIVE -->
+  <section class="bg-ink">
+    <div class="wrap">
+      <div class="row row-rev reveal">
+        <div>
+          <div style="margin-bottom:1rem"><span class="tag tag-violet">Galactic centres</span><span class="tag">10⁶–10¹⁰ M☉</span></div>
+          <span class="kicker">Type 02</span>
+          <h2 style="font-size:clamp(2.5rem,5vw,4.5rem);margin-bottom:1rem">SUPER-<br>MASSIVE</h2>
+          <p>Found at the centre of virtually every large galaxy. Despite their enormous mass, the average density of a supermassive black hole can actually be less than water. Their event horizons are so vast that an infalling astronaut would cross the point of no return without feeling any unusual tidal forces.</p>
+          <p style="margin-top:1rem">How they grew so large so quickly after the Big Bang is still one of astrophysics' biggest open questions.</p>
+          <ul class="num-list">
+            <li>Sgr A* — ~4 million solar masses, at the centre of the Milky Way, imaged in 2022</li>
+            <li>M87* — ~6.5 billion solar masses, the first black hole ever photographed (2019)</li>
+            <li>TON 618 — ~66 billion solar masses, one of the largest known in the universe</li>
+          </ul>
+          <div class="fact-table" style="margin-top:1.5rem">
+            <div class="fact-row"><span class="fact-key">Mass range</span><span class="fact-val accent">10⁶–10¹⁰ M☉</span></div>
+            <div class="fact-row"><span class="fact-key">Horizon size (M87*)</span><span class="fact-val">~120 astronomical units</span></div>
+            <div class="fact-row"><span class="fact-key">Formation</span><span class="fact-val">Still actively debated</span></div>
+            <div class="fact-row"><span class="fact-key">Location</span><span class="fact-val">Centre of galaxies</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="img-slot img-4-3">
+            <span class="img-label">Supermassive black hole — 4:3</span>
+            <span class="img-hint">Suggest: EHT image of M87* (2019) or Sgr A* (2022)</span>
+          </div>
+          <p class="img-caption">Fig. 8 — M87*, the first black hole ever photographed. April 10, 2019.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERMEDIATE -->
+  <section class="bg-black">
+    <div class="wrap">
+      <div class="row reveal">
+        <div>
+          <div style="margin-bottom:1rem"><span class="tag tag-pink">Rarely confirmed</span><span class="tag">100–100,000 M☉</span><span class="tag">Missing link</span></div>
+          <span class="kicker">Type 03</span>
+          <h2 style="font-size:clamp(2.5rem,5vw,4.5rem);margin-bottom:1rem">INTER-<br>MEDIATE</h2>
+          <p>The missing link between stellar and supermassive classes. Intermediate-mass black holes (IMBHs) are among the most sought-after objects in astrophysics — suspected for decades, but confirmed detections remain extremely rare.</p>
+          <p style="margin-top:1rem">They may form in dense star clusters through chains of stellar mergers, and could be the seeds from which supermassive black holes eventually grew.</p>
+          <ul class="num-list">
+            <li>HLX-1 — the strongest confirmed candidate, ~20,000 solar masses</li>
+            <li>GW190521 — a gravitational wave event producing a ~142 solar mass remnant</li>
+          </ul>
+          <div class="fact-table" style="margin-top:1.5rem">
+            <div class="fact-row"><span class="fact-key">Mass range</span><span class="fact-val accent">100–100,000 M☉</span></div>
+            <div class="fact-row"><span class="fact-key">Confirmed detections</span><span class="fact-val">Very few</span></div>
+            <div class="fact-row"><span class="fact-key">Significance</span><span class="fact-val">Bridges stellar &amp; supermassive</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="img-slot img-4-3">
+            <span class="img-label">Intermediate black hole — 4:3</span>
+            <span class="img-hint">Suggest: HLX-1 X-ray image, or star cluster illustration</span>
+          </div>
+          <p class="img-caption">Fig. 9 — Intermediate black hole caption.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIMORDIAL -->
+  <section class="bg-ink">
+    <div class="wrap">
+      <div class="row row-rev reveal">
+        <div>
+          <div style="margin-bottom:1rem"><span class="tag tag-green">Theoretical</span><span class="tag">Any mass</span><span class="tag">Big Bang relic</span></div>
+          <span class="kicker">Type 04</span>
+          <h2 style="font-size:clamp(2.5rem,5vw,4.5rem);margin-bottom:1rem">PRIMORDIAL<br>RELICS</h2>
+          <p>Hypothetical black holes formed in the first moments after the Big Bang, when density fluctuations were so extreme that regions of space collapsed before any star had ever formed. They could have any mass — from subatomic to millions of solar masses.</p>
+          <p style="margin-top:1rem">Primordial black holes are one of the leading candidates for dark matter. If they exist in sufficient numbers, they could explain the invisible mass that holds galaxies together.</p>
+          <div class="fact-table" style="margin-top:1.5rem">
+            <div class="fact-row"><span class="fact-key">Origin</span><span class="fact-val accent">Big Bang density fluctuations</span></div>
+            <div class="fact-row"><span class="fact-key">Predicted by</span><span class="fact-val">Stephen Hawking, 1971</span></div>
+            <div class="fact-row"><span class="fact-key">Status</span><span class="fact-val">Theoretical — unconfirmed</span></div>
+            <div class="fact-row"><span class="fact-key">Dark matter candidate</span><span class="fact-val">Yes — actively searched for</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="img-slot img-4-3">
+            <span class="img-label">Primordial black hole — 4:3</span>
+            <span class="img-hint">Suggest: early universe illustration, CMBR map, Big Bang art</span>
+          </div>
+          <p class="img-caption">Fig. 10 — Primordial black hole caption.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-inner">
+        <div class="footer-logo">RAD <em>R</em>ELATIVITY</div>
+        <ul class="footer-nav">
+          <li><button onclick="go('home')">Home</button></li>
+          <li><button onclick="go('explore')">rele</button></li>
+          <li><button onclick="go('types')">Types</button></li>
+          <li><button onclick="go('learn')">Learn</button></li>
+          <li><button onclick="go('data')">Data</button></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2025 RAD RELATIVITY — Black Hole Research</span>
+        <div class="spec-line spec-line-footer"></div>
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /types -->
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     LEARN
+═══════════════════════════════════════════════════════════════ -->
+<div id="page-learn" class="page">
+
+  <div class="pg-header bg-ink">
+    <div class="wrap">
+      <p class="trail">Rad Relativity / <span>Learn</span></p>
+      <h1>THE SCIENCE<br>OF THE VOID</h1>
+      <p>A plain-language guide to the physics of black holes — how they work, why they exist, and what they tell us about space and time.</p>
+    </div>
+  </div>
+
+  <section class="bg-black">
+    <div class="wrap">
+      <div class="row" style="align-items:start">
+
+        <!-- MAIN ARTICLE -->
+        <div>
+          <span class="kicker">Core concepts</span>
+          <h2 style="font-size:clamp(2rem,4vw,3.5rem);margin-bottom:1.5rem">UNDERSTANDING<br>BLACK HOLES</h2>
+
+          <h3 style="font-family:var(--display);font-size:1.6rem;letter-spacing:.04em;margin-bottom:.75rem">The Schwarzschild Radius</h3>
+          <p>The Schwarzschild radius defines the size of a black hole's event horizon. It is calculated as $r_s = \frac{2GM}{c^2}$, where $G$ is the gravitational constant, $M$ is the mass, and $c$ is the speed of light.</p>
+          <p>Crucially, any object can theoretically become a black hole if compressed within its own Schwarzschild radius. For Earth, that's roughly 9 millimetres — the size of a marble. For the Sun, about 3 kilometres.</p>
+
+          <div class="pull-stat reveal" style="margin:2rem 0">
+            <div class="pull-stat-num" style="color:var(--cyan)">9 mm</div>
+            <div class="pull-stat-label">The Schwarzschild radius of Earth — compress our planet to this size and it becomes a black hole</div>
+          </div>
+
+          <div class="img-slot img-16-9 reveal" style="margin:2rem 0">
+            <span class="img-label">Concept diagram — 16:9</span>
+            <span class="img-hint">Suggest: Schwarzschild radius diagram, spacetime curvature illustration</span>
+          </div>
+          <p class="img-caption">Fig. 11 — Schwarzschild radius diagram.</p>
+
+          <hr class="rule">
+
+          <h3 style="font-family:var(--display);font-size:1.6rem;letter-spacing:.04em;margin-bottom:.75rem">Hawking Radiation</h3>
+          <p>Predicted by Stephen Hawking in 1974, Hawking radiation arises from quantum effects at the event horizon. The quantum vacuum is filled with virtual particle-antiparticle pairs that constantly appear and annihilate. Near a black hole's horizon, one particle can fall in while the other escapes — allowing the black hole to slowly lose mass over time.</p>
+          <p>The temperature of this radiation is $T_H = \frac{\hbar c^3}{8\pi G M k_B}$ — meaning smaller black holes are hotter and evaporate faster. A black hole the mass of the Sun would take roughly $10^{74}$ years to fully evaporate — vastly longer than the current age of the universe.</p>
+
+          <blockquote>
+            "Not only does God play dice, but he sometimes throws them where they cannot be seen."
+            <cite>— Stephen Hawking</cite>
+          </blockquote>
+
+          <hr class="rule">
+
+          <h3 style="font-family:var(--display);font-size:1.6rem;letter-spacing:.04em;margin-bottom:.75rem">Gravitational Time Dilation</h3>
+          <p>General relativity predicts that time passes more slowly in stronger gravitational fields. Near a black hole, this effect becomes extreme. The proper time experienced at radius $r$ relative to a distant observer runs at a rate $\frac{d\tau}{dt} = \sqrt{1 - \frac{r_s}{r}}$ — which tends to zero as $r \to r_s$. Time effectively stops at the horizon from the outside perspective.</p>
+          <p>This is not a metaphor — it is a real, measurable effect. GPS satellites must correct for gravitational time dilation every single day. Without these corrections, GPS systems would accumulate errors of roughly 10 kilometres per day.</p>
+
+          <div class="img-slot img-16-9 reveal" style="margin:2rem 0">
+            <span class="img-label">Time dilation diagram — 16:9</span>
+            <span class="img-hint">Suggest: clock comparison diagram, spacetime warping illustration</span>
+          </div>
+          <p class="img-caption">Fig. 12 — Time dilation near a massive object.</p>
+
+          <hr class="rule">
+
+          <h3 style="font-family:var(--display);font-size:1.6rem;letter-spacing:.04em;margin-bottom:.75rem">Gravitational Waves</h3>
+          <p>When two massive objects such as black holes orbit each other and eventually merge, they create ripples in the fabric of spacetime itself — gravitational waves. These travel at the speed of light and stretch and compress space as they pass.</p>
+          <p>On September 14, 2015, the LIGO detector recorded the first direct detection of gravitational waves — the signature of two stellar black holes merging 1.3 billion light-years away. The signal lasted less than a second but confirmed one of the last major untested predictions of general relativity.</p>
+        </div>
+
+        <!-- TIMELINE SIDEBAR -->
+        <div>
+          <span class="kicker">History</span>
+          <h3 style="font-family:var(--display);font-size:2rem;letter-spacing:.04em;margin-bottom:2rem">DISCOVERY<br>TIMELINE</h3>
+          <div class="timeline reveal">
+            <div class="tl-item"><div class="tl-year">1783</div><div class="tl-title">Dark Stars</div><p class="tl-body">John Michell proposes that a sufficiently massive star could have an escape velocity exceeding light — he calls them "dark stars."</p></div>
+            <div class="tl-item"><div class="tl-year">1915</div><div class="tl-title">General Relativity</div><p class="tl-body">Einstein publishes general relativity, providing the mathematical framework that makes black holes inevitable.</p></div>
+            <div class="tl-item"><div class="tl-year">1916</div><div class="tl-title">Schwarzschild Solution</div><p class="tl-body">Karl Schwarzschild, writing from the WWI front lines, derives the first exact solution to Einstein's equations — defining what we now call the Schwarzschild radius.</p></div>
+            <div class="tl-item"><div class="tl-year">1967</div><div class="tl-title">"Black Hole" coined</div><p class="tl-body">John Wheeler uses the term at a New York lecture, replacing the unwieldy "gravitationally completely collapsed object."</p></div>
+            <div class="tl-item"><div class="tl-year">1974</div><div class="tl-title">Hawking Radiation</div><p class="tl-body">Stephen Hawking predicts that quantum effects cause black holes to slowly radiate energy and lose mass over time.</p></div>
+            <div class="tl-item"><div class="tl-year">1994</div><div class="tl-title">Hubble confirms M87*</div><p class="tl-body">The Hubble Space Telescope confirms a supermassive black hole at the centre of galaxy M87, observing gas rotating at over 550 km/s.</p></div>
+            <div class="tl-item"><div class="tl-year">2015</div><div class="tl-title">First gravitational waves</div><p class="tl-body">LIGO detects waves from two merging stellar black holes 1.3 billion light-years away — confirming general relativity and opening gravitational wave astronomy.</p></div>
+            <div class="tl-item"><div class="tl-year">2019</div><div class="tl-title">First image of a black hole</div><p class="tl-body">The Event Horizon Telescope releases the first photograph of a black hole — M87* — 55 million light-years away.</p></div>
+            <div class="tl-item"><div class="tl-year">2022</div><div class="tl-title">Sagittarius A* imaged</div><p class="tl-body">The EHT images Sgr A*, the supermassive black hole at the centre of our own Milky Way, just 27,000 light-years away.</p></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       WHITE SECTION — THE HOLE
+       Pure white with neon highlights, smooth gradient transition
+  ═══════════════════════════════════════════════════════════════ -->
+  <div class="white-section">
+    <div class="white-inner reveal">
+
+      <span class="kicker">The Hole Itself</span>
+      <h2>WHAT IS THE<br>HOLE IN A<br>BLACK HOLE?</h2>
+
+      <p style="margin-top:1.5rem;font-size:1.05rem;line-height:1.9">The word "hole" is deceptively simple. It implies an absence — an emptiness carved into the fabric of space. But a black hole is not empty. It contains everything that ever fell into it, crushed beyond the reach of any force we know, compressed to a point where <span class="hl-violet">spacetime itself breaks down</span>.</p>
+
+      <p>The "hole" is really a region. A sphere of spacetime from which there is no exit. Cross the <span class="hl-orange">event horizon</span> — the surface of no return — and every direction you could travel, every future you could have, points only one way: inward. Not because something is pulling you. Because inside a black hole, <span class="hl-cyan">inward is the only direction time flows</span>. You cannot avoid the singularity any more than you can avoid next Tuesday.</p>
+
+      <hr class="rule">
+
+      <h3>The Interior Structure</h3>
+
+      <p>For a non-rotating (Schwarzschild) black hole, the interior is startlingly simple. There are no walls. No floor. Just a region of increasingly warped spacetime that ends at the singularity — a point where the <span class="hl-violet">curvature of spacetime becomes infinite</span>. Every physical quantity — density, temperature, tidal force — diverges to infinity there.</p>
+
+      <p>For a rotating black hole (the <span class="hl-orange">Kerr solution</span>, which describes real astrophysical black holes more accurately), the interior is far stranger. The singularity is no longer a point but a ring. And the mathematics suggests — though cannot confirm — the existence of regions where time travel might theoretically be possible, or where passage to other regions of spacetime cannot be ruled out. These are extraordinary claims that general relativity raises but cannot resolve without a theory of quantum gravity.</p>
+
+      <p>What we know for certain is this: once inside the event horizon, you are <span class="hl-pink">causally disconnected from the rest of the universe</span>. Nothing you do, say, or signal can ever reach the outside again. You are in a place that is, by definition, beyond the reach of physics as we observe it.</p>
+
+      <blockquote>
+        "Inside a black hole, the roles of space and time are exchanged. The singularity lies in your future, not in some particular place."
+        <cite>— Kip Thorne, <em>Black Holes and Time Warps</em></cite>
+      </blockquote>
+
+      <hr class="rule">
+
+      <h3>The Information Paradox</h3>
+
+      <p>Here is the deepest problem the "hole" creates. Quantum mechanics insists that information — the complete description of a physical state — can never be destroyed. It can be scrambled, encoded, transformed, but the total information content of the universe must be conserved.</p>
+
+      <p>Black holes seem to violate this. Matter falls in. The black hole slowly evaporates via <span class="hl-cyan">Hawking radiation</span>, which appears to carry no information about what fell in — it is purely thermal, structureless. When the black hole is gone, where did the information go? Was it destroyed? Is it somehow encoded in the radiation after all? Does it escape through some quantum channel we haven't discovered?</p>
+
+      <p>This is the <span class="hl-gold">black hole information paradox</span>, and it sits at the intersection of quantum mechanics and general relativity — the two great theories of modern physics that we have not yet managed to reconcile. Solving it may require a fundamental revision of one or both. It is, by many physicists' judgement, the most important unsolved problem in theoretical physics today.</p>
+
+      <p>The paradox is sharpened by the Bekenstein–Hawking entropy formula:</p>
+
+      $$S_{BH} = \frac{k_B\, c^3\, A}{4\, G\, \hbar}$$
+
+      <p style="margin-top:.5rem;font-size:.88rem;color:#555">Where $A = 4\pi r_s^2$ is the area of the event horizon. This says a black hole's entropy — the amount of hidden information it contains — scales with its surface area, not its volume. This is the seed of the <span class="hl-violet">holographic principle</span>: the idea that all the information inside a volume of space can be encoded on its boundary surface. If true for black holes, perhaps it is true of the universe itself.</p>
+
+      <p style="margin-top:1.5rem;font-size:.9rem;color:#888;font-style:italic">The hole in a black hole, then, is not a hole at all. It is an answer we cannot yet reach.</p>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-inner">
+        <div class="footer-logo">RAD <em>R</em>ELATIVITY</div>
+        <ul class="footer-nav">
+          <li><button onclick="go('home')">Home</button></li>
+          <li><button onclick="go('explore')">rele</button></li>
+          <li><button onclick="go('types')">Types</button></li>
+          <li><button onclick="go('learn')">Learn</button></li>
+          <li><button onclick="go('data')">Data</button></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2025 RAD RELATIVITY — Black Hole Research</span>
+        <div class="spec-line spec-line-footer"></div>
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /learn -->
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     DATA
+═══════════════════════════════════════════════════════════════ -->
+<div id="page-data" class="page">
+
+  <div class="pg-header bg-ink">
+    <div class="wrap">
+      <p class="trail">Rad Relativity / <span>Data</span></p>
+      <h1>THE NUMBERS<br>OF THE VOID</h1>
+      <p>Key measurements, physical constants, and a reference directory of notable black holes.</p>
+    </div>
+  </div>
+
+  <section class="bg-black">
+    <div class="wrap">
+
+      <span class="kicker">Notable black holes</span>
+      <div class="row-3 reveal" style="margin-top:1.5rem">
+        <div class="card">
+          <span class="overline">Milky Way centre</span>
+          <h3>Sgr A*</h3>
+          <div class="fact-table">
+            <div class="fact-row"><span class="fact-key">Mass</span><span class="fact-val accent">~4 million M☉</span></div>
+            <div class="fact-row"><span class="fact-key">Event horizon radius</span><span class="fact-val">~12 million km</span></div>
+            <div class="fact-row"><span class="fact-key">Distance from Earth</span><span class="fact-val">~26,000 light-years</span></div>
+            <div class="fact-row"><span class="fact-key">First imaged</span><span class="fact-val">2022 — EHT</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <span class="overline">Galaxy M87</span>
+          <h3>M87*</h3>
+          <div class="fact-table">
+            <div class="fact-row"><span class="fact-key">Mass</span><span class="fact-val accent">~6.5 billion M☉</span></div>
+            <div class="fact-row"><span class="fact-key">Event horizon radius</span><span class="fact-val">~19 billion km</span></div>
+            <div class="fact-row"><span class="fact-key">Distance from Earth</span><span class="fact-val">~55 million light-years</span></div>
+            <div class="fact-row"><span class="fact-key">First imaged</span><span class="fact-val">2019 — EHT</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <span class="overline">Quasar host</span>
+          <h3>TON 618</h3>
+          <div class="fact-table">
+            <div class="fact-row"><span class="fact-key">Mass</span><span class="fact-val accent">~66 billion M☉</span></div>
+            <div class="fact-row"><span class="fact-key">Event horizon</span><span class="fact-val">~870 AU</span></div>
+            <div class="fact-row"><span class="fact-key">Distance from Earth</span><span class="fact-val">~10.4 billion light-years</span></div>
+            <div class="fact-row"><span class="fact-key">Notable</span><span class="fact-val">One of largest known</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row reveal" style="margin-top:5rem;align-items:start">
+        <div>
+          <span class="kicker">Physics reference</span>
+          <h3 style="font-family:var(--display);font-size:2rem;letter-spacing:.04em;margin-bottom:1.5rem">FUNDAMENTAL<br>CONSTANTS</h3>
+          <div class="fact-table">
+            <div class="fact-row"><span class="fact-key">Speed of light (c)</span><span class="fact-val accent">299,792,458 m/s</span></div>
+            <div class="fact-row"><span class="fact-key">Gravitational constant (G)</span><span class="fact-val">6.674 × 10⁻¹¹ N·m²/kg²</span></div>
+            <div class="fact-row"><span class="fact-key">Planck length</span><span class="fact-val">1.616 × 10⁻³⁵ m</span></div>
+            <div class="fact-row"><span class="fact-key">Boltzmann constant (k)</span><span class="fact-val">1.381 × 10⁻²³ J/K</span></div>
+            <div class="fact-row"><span class="fact-key">Solar mass (M☉)</span><span class="fact-val">1.989 × 10³⁰ kg</span></div>
+          </div>
+          <h3 style="font-family:var(--display);font-size:2rem;letter-spacing:.04em;margin:2.5rem 0 1.5rem">KEY<br>FORMULAE</h3>
+          <div class="fact-table">
+            <div class="fact-row"><span class="fact-key">Schwarzschild radius</span><span class="fact-val accent">r_s = 2GM/c²</span></div>
+            <div class="fact-row"><span class="fact-key">Hawking temperature</span><span class="fact-val">T = ℏc³ / (8πGMk)</span></div>
+            <div class="fact-row"><span class="fact-key">Photon sphere radius</span><span class="fact-val">r = 3GM/c²</span></div>
+            <div class="fact-row"><span class="fact-key">Bekenstein–Hawking entropy</span><span class="fact-val">S = kA / (4l_P²)</span></div>
+            <div class="fact-row"><span class="fact-key">Innermost stable orbit</span><span class="fact-val">r = 3 r_s</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="img-slot img-1-1">
+            <span class="img-label">Data / diagram image — 1:1</span>
+            <span class="img-hint">Suggest: physics diagram, LIGO visualisation, formula board</span>
+          </div>
+          <p class="img-caption">Fig. 13 — Physics reference image caption.</p>
+          <div class="pull-stat" style="margin-top:2rem">
+            <div class="pull-stat-num" style="color:var(--violet)">90+</div>
+            <div class="pull-stat-label">Gravitational wave events detected by LIGO / VIRGO as of 2023</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════════
+           KEY EQUATIONS — rendered with KaTeX
+           To add more: copy a .katex-display block and write LaTeX
+           between $$ ... $$ delimiters.
+      ═══════════════════════════════════════════════════════════ -->
+      <div class="reveal" style="margin-top:5rem">
+        <span class="kicker">Key equations</span>
+        <h3 style="font-family:var(--display);font-size:2rem;letter-spacing:.04em;margin-bottom:.5rem">THE MATHS<br>OF BLACK HOLES</h3>
+        <p style="margin-bottom:2.5rem;max-width:560px">The equations that govern black holes, rendered in full. Hover any inline equation to see it in context. All notation follows standard relativistic conventions where $c = G = 1$ unless stated.</p>
+
+        <!-- SCHWARZSCHILD RADIUS -->
+        $$r_s = \frac{2GM}{c^2}$$
+        <div class="eq-row">
+          <span class="eq-num">Eq. 1</span>
+          <span class="eq-label">Schwarzschild radius — the radius of the event horizon for a non-rotating black hole of mass $M$</span>
+        </div>
+
+        <!-- EINSTEIN FIELD EQUATIONS -->
+        $$G_{\mu\nu} + \Lambda g_{\mu\nu} = \frac{8\pi G}{c^4}\, T_{\mu\nu}$$
+        <div class="eq-row">
+          <span class="eq-num">Eq. 2</span>
+          <span class="eq-label">Einstein field equations — $G_{\mu\nu}$ is the Einstein tensor describing spacetime curvature, $T_{\mu\nu}$ is the stress-energy tensor, $\Lambda$ is the cosmological constant</span>
+        </div>
+
+        <!-- SCHWARZSCHILD METRIC -->
+        $$ds^2 = -\!\left(1 - \frac{r_s}{r}\right)c^2\,dt^2 + \left(1 - \frac{r_s}{r}\right)^{-1}\!dr^2 + r^2 d\Omega^2$$
+        <div class="eq-row">
+          <span class="eq-num">Eq. 3</span>
+          <span class="eq-label">Schwarzschild metric — describes spacetime geometry outside a spherically symmetric, non-rotating black hole. $d\Omega^2 = d\theta^2 + \sin^2\!\theta\, d\phi^2$ is the solid angle element</span>
+        </div>
+
+        <!-- HAWKING TEMPERATURE -->
+        $$T_H = \frac{\hbar\, c^3}{8\pi\, G\, M\, k_B}$$
+        <div class="eq-row">
+          <span class="eq-num">Eq. 4</span>
+          <span class="eq-label">Hawking temperature — the thermal radiation temperature of a black hole of mass $M$. $\hbar$ is the reduced Planck constant, $k_B$ is Boltzmann's constant. Smaller $M$ → higher temperature</span>
+        </div>
+
+        <!-- BEKENSTEIN-HAWKING ENTROPY -->
+        $$S_{BH} = \frac{k_B\, c^3\, A}{4\, G\, \hbar} = \frac{k_B\, A}{4\, \ell_P^{\,2}}$$
+        <div class="eq-row">
+          <span class="eq-num">Eq. 5</span>
+          <span class="eq-label">Bekenstein–Hawking entropy — black hole entropy is proportional to its horizon area $A$, not volume. $\ell_P = \sqrt{\hbar G / c^3}$ is the Planck length. The holographic principle originates here</span>
+        </div>
+
+        <!-- PHOTON SPHERE -->
+        $$r_{ph} = \frac{3GM}{c^2} = \frac{3}{2}\,r_s$$
+        <div class="eq-row">
+          <span class="eq-num">Eq. 6</span>
+          <span class="eq-label">Photon sphere radius — the distance at which gravity is strong enough to force photons into circular orbits. Sits at $1.5\,r_s$. Responsible for the bright ring in black hole images</span>
+        </div>
+
+        <!-- ISCO -->
+        $$r_{ISCO} = \frac{6GM}{c^2} = 3\,r_s \quad \text{(Schwarzschild)}$$
+        <div class="eq-row">
+          <span class="eq-num">Eq. 7</span>
+          <span class="eq-label">Innermost stable circular orbit (ISCO) — the closest stable orbit matter can maintain before inevitably spiralling inward. Marks the inner edge of the accretion disk for a non-rotating black hole</span>
+        </div>
+
+        <!-- TIDAL FORCE -->
+        $$F_{tidal} \approx \frac{2GMd}{r^3}$$
+        <div class="eq-row">
+          <span class="eq-num">Eq. 8</span>
+          <span class="eq-label">Tidal (spaghettification) force — $d$ is the length of the infalling object, $r$ is its distance from the singularity. This grows as $r^{-3}$, becoming infinite at the singularity. For stellar black holes this is lethal well before the horizon</span>
+        </div>
+
+        <!-- GRAVITATIONAL TIME DILATION -->
+        $$\frac{d\tau}{dt} = \sqrt{1 - \frac{r_s}{r}}$$
+        <div class="eq-row">
+          <span class="eq-num">Eq. 9</span>
+          <span class="eq-label">Gravitational time dilation — proper time $d\tau$ experienced by an observer at radius $r$ relative to coordinate time $dt$ of a distant observer. As $r \to r_s$, this ratio $\to 0$: time stops at the event horizon</span>
+        </div>
+
+        <!-- KERR METRIC (simplified) -->
+        $$a = \frac{J}{Mc} \,, \quad 0 \leq a \leq \frac{GM}{c^2}$$
+        <div class="eq-row">
+          <span class="eq-num">Eq. 10</span>
+          <span class="eq-label">Kerr spin parameter — $J$ is the angular momentum of a rotating black hole. $a = 0$ gives the Schwarzschild solution; $a = GM/c^2$ is the maximally spinning (extremal) Kerr black hole. Real astrophysical black holes have $a \lesssim 0.998\,GM/c^2$</span>
+        </div>
+      </div>
+
+      <div class="reveal" style="margin-top:5rem">
+        <span class="kicker">Directory</span>
+        <h3 style="font-family:var(--display);font-size:2rem;letter-spacing:.04em;margin-bottom:1.5rem">NOTABLE<br>BLACK HOLES</h3>
+        <table class="data-table">
+          <thead><tr><th>Name</th><th>Type</th><th>Mass (M☉)</th><th>Distance</th><th>Notable for</th></tr></thead>
+          <tbody>
+            <tr><td class="hl">Sgr A*</td><td>Supermassive</td><td>~4,000,000</td><td>26,000 ly</td><td>Centre of the Milky Way</td></tr>
+            <tr><td class="hl">M87*</td><td>Supermassive</td><td>~6,500,000,000</td><td>55 million ly</td><td>First black hole ever photographed</td></tr>
+            <tr><td class="hl">TON 618</td><td>Supermassive</td><td>~66,000,000,000</td><td>10.4 billion ly</td><td>One of the most massive known</td></tr>
+            <tr><td class="hl">Cygnus X-1</td><td>Stellar</td><td>~21</td><td>7,200 ly</td><td>First confirmed stellar black hole (1971)</td></tr>
+            <tr><td class="hl">GW150914 remnant</td><td>Stellar</td><td>~62</td><td>1.3 billion ly</td><td>First LIGO gravitational wave source</td></tr>
+            <tr><td class="hl">V404 Cygni</td><td>Stellar</td><td>~9</td><td>7,800 ly</td><td>Most active X-ray binary in Milky Way</td></tr>
+            <tr><td class="hl">HLX-1</td><td>Intermediate</td><td>~20,000</td><td>290 million ly</td><td>Best intermediate-mass BH candidate</td></tr>
+            <tr><td class="hl">Holm 15A*</td><td>Supermassive</td><td>~40,000,000,000</td><td>700 million ly</td><td>Among the largest ever measured</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-inner">
+        <div class="footer-logo">RAD <em>R</em>ELATIVITY</div>
+        <ul class="footer-nav">
+          <li><button onclick="go('home')">Home</button></li>
+          <li><button onclick="go('rele')">Reletivity</button></li>
+          <li><button onclick="go('types')">Types</button></li>
+          <li><button onclick="go('learn')">Learn</button></li>
+          <li><button onclick="go('data')">Data</button></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2025 RAD RELATIVITY — Black Hole Research</span>
+        <div class="spec-line spec-line-footer"></div>
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /data -->
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECRET SIMULATOR MODAL
+     (type "hole" on the explore page)
+═══════════════════════════════════════════════════════════════ -->
+<div class="bh-modal-overlay" id="bh-modal">
+  <button class="bh-modal-close" onclick="closeSim()">[ ESC to close ]</button>
+  <canvas id="bh-sim-canvas"></canvas>
+  <p class="bh-sim-label" id="bh-sim-label">Rendering Schwarzschild geometry...</p>
+</div>
+
+
+<script>
+/* ── PAGE ROUTER ────────────────────────────────────────── */
+function go(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('#nav button').forEach(b =>
+    b.classList.toggle('active', b.dataset.p === id)
+  );
+  const page = document.getElementById('page-' + id);
+  if (!page) return;
+  page.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  currentPage = id;
+  initReveal();
+}
+
+/* ── SCROLL REVEAL ──────────────────────────────────────── */
+function initReveal() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.page.active .reveal').forEach(el => { el.classList.remove('in'); obs.observe(el); });
+}
+initReveal();
+
+window.addEventListener('scroll', () => {
+  document.querySelector('nav').style.borderBottomColor = window.scrollY > 50 ? 'var(--border-hi)' : 'var(--border)';
+});
+
+/* ── SECRET: type "hole" on explore page ─────────────────
+   Opens a physically accurate Schwarzschild black hole
+   simulation. Not documented anywhere. Shhh.
+─────────────────────────────────────────────────────────── */
+let currentPage = 'home';
+let typedSeq = '';
+
+document.addEventListener('keydown', e => {
+  if (currentPage !== 'explore') { typedSeq = ''; return; }
+  typedSeq += e.key.toLowerCase();
+  if (typedSeq.length > 6) typedSeq = typedSeq.slice(-6);
+  if (typedSeq.includes('hole')) {
+    typedSeq = '';
+    openSim();
+  }
+});
+
+document.addEventListener('keyup', e => {
+  if (e.key === 'Escape') closeSim();
+});
+
+function openSim() {
+  const modal = document.getElementById('bh-modal');
+  modal.classList.add('open');
+  // small delay so modal renders before we size the canvas
+  setTimeout(renderBH, 80);
+}
+
+function closeSim() {
+  document.getElementById('bh-modal').classList.remove('open');
+}
+
+/* ── REALISTIC SCHWARZSCHILD BLACK HOLE RENDERER ──────────
+   Physics basis:
+   • Shadow radius = 3√3 · GM/c² ≈ 2.6 × r_s
+   • Photon sphere at r = 3GM/c² = 1.5 × r_s
+   • ISCO (innermost stable circular orbit) at 6GM/c² = 3 × r_s
+   • Accretion disk: warm inner edge, cooler outer rim
+   • Doppler beaming: approaching (left) side is ~4× brighter
+   • Far-side disk lensed over the top of the shadow
+   • Background starfield with gravitational lensing distortion
+─────────────────────────────────────────────────────────── */
+function renderBH() {
+  const canvas = document.getElementById('bh-sim-canvas');
+  const W = canvas.offsetWidth;
+  const H = canvas.offsetHeight;
+  canvas.width  = W * window.devicePixelRatio;
+  canvas.height = H * window.devicePixelRatio;
+  canvas.style.width  = W + 'px';
+  canvas.style.height = H + 'px';
+  const ctx = canvas.getContext('2d');
+  ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+  const S = Math.min(W, H);
+
+  // Black hole center (slightly left of screen center for realism)
+  const cx = W * 0.5;
+  const cy = H * 0.5;
+
+  // Physical scale — all in pixel units
+  const M       = S * 0.065;          // mass parameter (rs = 2M)
+  const shadow  = 3 * Math.sqrt(3) * M; // true shadow: 5.196M ≈ 2.6 rs
+  const photon  = 3 * M;              // photon sphere = 3M
+  const isco    = 6 * M;              // ISCO = 6M (disk inner edge)
+  const diskOut = M * 20;             // outer disk edge
+
+  // Disk inclination — viewed from ~20° above equatorial plane
+  // inc=sin(20°)≈0.34 → controls how elliptical disk appears
+  const inc = 0.30;
+
+  // Deterministic RNG for consistent star positions
+  function rng(seed) {
+    let s = seed;
+    return () => { s = (s * 1664525 + 1013904223) & 0xffffffff; return (s >>> 0) / 4294967296; };
+  }
+  const rand = rng(31415926);
+
+  // ── 1. BLACK BACKGROUND ──
+  ctx.fillStyle = '#000';
+  ctx.fillRect(0, 0, W, H);
+
+  // ── 2. AMBIENT ACCRETION GLOW (wide, dim) ──
+  {
+    const g = ctx.createRadialGradient(cx, cy + shadow * 0.6, 0, cx, cy, diskOut * 1.5);
+    g.addColorStop(0,   'rgba(255,110,20,.00)');
+    g.addColorStop(0.25,'rgba(255,110,20,.09)');
+    g.addColorStop(0.6, 'rgba(255, 60, 5,.03)');
+    g.addColorStop(1,   'rgba(0,0,0,0)');
+    ctx.fillStyle = g;
+    ctx.beginPath(); ctx.arc(cx, cy, diskOut * 1.5, 0, Math.PI * 2); ctx.fill();
+
+    // Doppler lobe — approaching side (left/bottom) is brighter
+    const g2 = ctx.createRadialGradient(cx - photon*0.6, cy + photon*0.5, 0, cx, cy, diskOut);
+    g2.addColorStop(0,   'rgba(255,180,60,.18)');
+    g2.addColorStop(0.25,'rgba(255,130,30,.08)');
+    g2.addColorStop(1,   'rgba(0,0,0,0)');
+    ctx.fillStyle = g2;
+    ctx.beginPath(); ctx.arc(cx, cy, diskOut, 0, Math.PI * 2); ctx.fill();
+  }
+
+  // ── 3. FAR-SIDE DISK (lensed arc above shadow) ──
+  // In real images this appears as a bright arc above the shadow
+  ctx.save();
+  ctx.translate(cx, cy);
+  for (let r = diskOut * 0.9; r >= isco; r -= 1.8) {
+    const t = (r - isco) / (diskOut - isco);
+    const hot = Math.pow(1 - t, 0.6);
+    // Far side receding → dimmer (Doppler factor ~0.3)
+    const a = hot * hot * 0.055;
+    const {R,G,B} = diskCol(hot, 0.5);
+    ctx.beginPath();
+    ctx.ellipse(0, -r * inc * 0.55, r, r * inc * 0.28, 0, Math.PI, 0, true);
+    ctx.strokeStyle = `rgba(${R},${G},${B},${a})`;
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+  }
+  ctx.restore();
+
+  // ── 4. LENSED STARFIELD ──
+  for (let i = 0; i < 700; i++) {
+    const sx0 = rand() * W, sy0 = rand() * H;
+    const dx0 = sx0 - cx, dy0 = sy0 - cy;
+    const r0  = Math.sqrt(dx0*dx0 + dy0*dy0);
+    if (r0 < shadow * 1.01) continue; // behind shadow
+
+    // Gravitational lensing: photons appear deflected outward from BH
+    // Deflection angle α ≈ 2rs/b in weak field (rs = 2M)
+    const rs = 2 * M;
+    const defl = 2 * rs / Math.max(r0, shadow);
+    const ang  = Math.atan2(dy0, dx0);
+    // Star appears shifted outward
+    const r1  = r0 / (1 - defl * Math.min(1, shadow / r0));
+    const sx  = cx + Math.cos(ang) * r1;
+    const sy  = cy + Math.sin(ang) * r1;
+
+    // Stars very near shadow get boosted brightness (lensing magnification)
+    const mag = 1 + 3 * Math.max(0, 1 - r0 / (shadow * 2));
+    const bri = (0.08 + rand() * 0.4) * mag;
+    const sz  = 0.3 + rand() * 1.1;
+    const warm = rand() > 0.65;
+    ctx.beginPath(); ctx.arc(sx, sy, sz, 0, Math.PI * 2);
+    ctx.fillStyle = warm
+      ? `rgba(255,235,180,${bri})`
+      : `rgba(210,220,255,${bri})`;
+    ctx.fill();
+  }
+
+  // ── 5. NEAR-SIDE DISK (bottom arc — approaching, brighter) ──
+  ctx.save();
+  ctx.translate(cx, cy);
+  // Clip to lower half only (near side of disk is below equator)
+  ctx.beginPath();
+  ctx.rect(-diskOut * 1.1, -shadow * 0.3, diskOut * 2.2, diskOut + shadow * 0.3);
+  ctx.clip();
+
+  for (let r = diskOut; r >= isco; r -= 1.5) {
+    const t   = (r - isco) / (diskOut - isco);
+    const hot = Math.pow(1 - t, 0.55);
+    // Near side approaching → bright (Doppler factor ~1.8 on left, ~0.6 on right)
+    const a = hot * (0.18 + hot * 0.18);
+    const {R,G,B} = diskCol(hot, 1.3);
+    ctx.beginPath();
+    ctx.ellipse(0, r * inc * 0.25, r, r * inc, 0, 0, Math.PI);
+    ctx.strokeStyle = `rgba(${R},${G},${B},${a})`;
+    ctx.lineWidth = 1.8;
+    ctx.stroke();
+  }
+  ctx.restore();
+
+  // Extra bright spot on left-bottom (Doppler beaming maximum)
+  {
+    const bx = cx - photon * 0.7, by = cy + photon * 0.55;
+    const g3 = ctx.createRadialGradient(bx, by, 0, bx, by, photon * 0.85);
+    g3.addColorStop(0,   'rgba(255,220,120,.55)');
+    g3.addColorStop(0.2, 'rgba(255,160, 40,.22)');
+    g3.addColorStop(0.6, 'rgba(255, 90, 10,.07)');
+    g3.addColorStop(1,   'rgba(0,0,0,0)');
+    ctx.fillStyle = g3;
+    ctx.beginPath(); ctx.arc(bx, by, photon * 0.85, 0, Math.PI * 2); ctx.fill();
+  }
+
+  // ── 6. PHOTON RING — bright ring just outside shadow ──
+  // In real images this is the characteristic thin glowing ring
+  for (let pass = 0; pass < 4; pass++) {
+    const rr = shadow + 2 + pass * 2.5;
+    const a  = (0.55 - pass * 0.1) / (1 + pass * 0.3);
+    const gPh = ctx.createRadialGradient(cx, cy, rr - 4, cx, cy, rr + 6);
+    gPh.addColorStop(0,   'rgba(0,0,0,0)');
+    gPh.addColorStop(0.4, `rgba(255,200, 90,${a * 0.6})`);
+    gPh.addColorStop(0.6, `rgba(255,230,140,${a})`);
+    gPh.addColorStop(1,   'rgba(0,0,0,0)');
+    ctx.beginPath();
+    ctx.arc(cx, cy, rr + 6, 0, Math.PI * 2);
+    ctx.arc(cx, cy, rr - 4, 0, Math.PI * 2, true);
+    ctx.fillStyle = gPh;
+    ctx.fill('evenodd');
+  }
+
+  // ── 7. SHADOW — pure black ──
+  ctx.beginPath(); ctx.arc(cx, cy, shadow, 0, Math.PI * 2);
+  ctx.fillStyle = '#000'; ctx.fill();
+
+  // Slight warm fringe at shadow edge (photon ring bleeds in slightly)
+  const gEdge = ctx.createRadialGradient(cx, cy, shadow * 0.92, cx, cy, shadow * 1.08);
+  gEdge.addColorStop(0,   'rgba(0,0,0,0)');
+  gEdge.addColorStop(0.6, 'rgba(255,140,30,.06)');
+  gEdge.addColorStop(1,   'rgba(0,0,0,0)');
+  ctx.beginPath();
+  ctx.arc(cx, cy, shadow * 1.08, 0, Math.PI * 2);
+  ctx.arc(cx, cy, shadow * 0.92, 0, Math.PI * 2, true);
+  ctx.fillStyle = gEdge; ctx.fill('evenodd');
+
+  // ── 8. STATUS LABEL ──
+  const lbl = document.getElementById('bh-sim-label');
+  lbl.textContent = `Schwarzschild radius: ${(2*M).toFixed(0)}px  ·  Shadow: ${shadow.toFixed(0)}px  ·  Photon sphere: ${photon.toFixed(0)}px  ·  Click canvas or press ESC to close`;
+  canvas.onclick = closeSim;
+}
+
+/* Accretion disk temperature → RGB
+   hot=1: inner edge  → white-orange (~10⁷K optical peak)
+   hot=0: outer edge  → deep amber-red (~10⁴K)
+   mult: brightness multiplier                            */
+function diskCol(hot, mult) {
+  const R = Math.min(255, Math.round(255 * mult));
+  const G = Math.min(255, Math.round((60 + hot * 140) * mult));
+  const B = Math.min(255, Math.round(hot * hot * 55 * mult));
+  return {R, G, B};
+}
+
+</script>
+</body>
+</html>
