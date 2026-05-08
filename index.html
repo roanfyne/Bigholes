@@ -1290,7 +1290,7 @@ let currentPage = 'home';
 let typedSeq = '';
 
 document.addEventListener('keydown', e => {
-  if (currentPage !== 'explore') { typedSeq = ''; return; }
+  if (currentPage !== 'rele') { typedSeq = ''; return; }
   typedSeq += e.key.toLowerCase();
   if (typedSeq.length > 6) typedSeq = typedSeq.slice(-6);
   if (typedSeq.includes('hole')) {
