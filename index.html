@@ -132,8 +132,8 @@
   ═══════════════════════════════════════════════════════════════ */
   .img-slot { position:relative; background:var(--surface); border:2px solid var(--border); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.5rem; overflow:hidden; outline: 1px solid var(--border);
   outline-offset: 1px; }  
-  .img-slot::before { content:''; position:absolute; top:0; left:0; width:15px; height:15px; border-top:1px solid var(--cyan); border-left:1px solid var(--cyan); border-top-offset: 2px; border-left-offset: 2px;}
-  .img-slot::after  { content:''; position:absolute; bottom:0; right:0; width:15px; height:15px; border-bottom:1px solid var(--cyan); border-right:1px solid var(--cyan); border-bottom-offset: 2px; border-right-offset: 2px;}
+  .img-slot::before { content:''; position:absolute; top:0; left:0; width:15px; height:15px; border-top:1px solid var(--cyan); border-left:1px solid var(--cyan); border-top-offset: -4px; border-left-offset: -4px;}
+  .img-slot::after  { content:''; position:absolute; bottom:0; right:0; width:15px; height:15px; border-bottom:1px solid var(--cyan); border-right:1px solid var(--cyan); border-bottom-offset: -4px; border-right-offset: -4px;}
   .img-slot .img-label { font-family:var(--mono); font-size:.58rem; letter-spacing:.2em; text-transform:uppercase; color:var(--dim); text-align:center; padding:0 1rem; }
   .img-slot .img-hint  { font-size:.75rem; color:var(--dim); text-align:center; padding:0 1.5rem; }
   .img-16-9 { aspect-ratio:16/9; }  .img-4-3 { aspect-ratio:4/3; }
