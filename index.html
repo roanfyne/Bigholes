@@ -130,7 +130,8 @@
   /* ═══════════════════════════════════════════════════════════════
      IMAGE SLOTS
   ═══════════════════════════════════════════════════════════════ */
-  .img-slot { position:relative; background:var(--surface); border:2px solid var(--border); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.5rem; overflow:hidden; }
+  .img-slot { position:relative; background:var(--surface); border:2px solid var(--border); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.5rem; overflow:hidden; outline: 1px solid var(--border);
+  outline-offset: 1px; }  
   .img-slot::before { content:''; position:absolute; top:0; left:0; width:14px; height:14px; border-top:1px solid var(--cyan); border-left:1px solid var(--cyan); }
   .img-slot::after  { content:''; position:absolute; bottom:0; right:0; width:14px; height:14px; border-bottom:1px solid var(--cyan); border-right:1px solid var(--cyan); }
   .img-slot .img-label { font-family:var(--mono); font-size:.58rem; letter-spacing:.2em; text-transform:uppercase; color:var(--dim); text-align:center; padding:0 1rem; }
