@@ -70,6 +70,11 @@
   .row-4   { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; }
   .row-rev { direction: rtl; }
   .row-rev > * { direction: ltr; }
+  .history-grid { display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:2rem; margin-top:2rem; }
+  .history-segment { background: rgba(255,255,255,.03); border:1px solid var(--border); padding:2rem 1.75rem; border-radius:1.5rem; }
+  .history-segment p:first-child { margin-top:0; }
+  .history-grid > .history-segment:first-child { grid-column:1/-1; }
+  @media (max-width:900px) { .history-grid { grid-template-columns:1fr; } }
   section { padding: 6rem 0; }
   section.tight { padding: 3.5rem 0; }
   section.flush { padding: 0; }
@@ -451,7 +456,7 @@
     <div class="hero-content wrap">
       <p class="hero-eyebrow">Rad Relativity — 2026</p>
       <h1 class="spectrum">BLACK<br>HOLES</h1>
-      <p class="hero-sub">def of a BlaCK HOLE.</p>
+      <p class="hero-sub">defenition of a BLACK HOLE.</p>
       <div class="hero-meta">
         <div class="hero-meta-item">
           <span class="label">Est. black holes</span>
@@ -647,7 +652,7 @@
             <div class="fact-row"><span class="fact-key">$L_0$ — Proper Length</span><span class="fact-val">Length in the object's own rest frame (not moving)</span></div>
             <div class="fact-row"><span class="fact-key">$L$ — Contracted Length</span><span class="fact-val">Shorter length seen by a moving observer</span></div>
             <div class="fact-row"><span class="fact-key">$v$ — Velocity</span><span class="fact-val">Speed of the object relative to the observer</span></div>
-            <div class="fact-row"><span class="fact-key">$c$ — Speed of Light</span><span class="fact-val">Universal speed limit (${\approx}3\times10^8$ m/s)</span></div>
+            <div class="fact-row"><span class="fact-key">$c$ — Speed of Light</span><span class="fact-val">Universal speed limit ($\approx3\times10^8$ m/s)</span></div>
             <div class="fact-row"><span class="fact-key">$\gamma$ — Lorentz Factor</span><span class="fact-val accent">$\gamma = 1\,/\,\sqrt{1 - v^2/c^2}$</span></div>
           </div>
           <div class="card" style="margin-top:1.5rem;border-color:var(--border-hi)">
@@ -661,8 +666,7 @@
       </div>
     </div>
   </section>
-
-  <!-- TIME DILATION — SETUP -->
+<!-- TIME DILATION — SETUP -->
   <section class="bg-ink">
     <div class="wrap">
       <span class="overline">Special Relativity — Effect 04</span>
@@ -905,67 +909,44 @@
 
   <section class="bg-black">
     <div class="wrap">
-      <div class="row reveal">
-        <div>
+      <div class="history-grid reveal">
+        <div class="history-segment">
           <span class="kicker">Special relativity</span>
           <h2 style="font-size:clamp(2.8rem,5vw,4.5rem);margin-bottom:1rem">Einstein begins the journey</h2>
-          <p class="body-lg">In 1905, Einstein published the special theory of relativity, a theory that would change the world. At the time, it was highly controversial because it contradicted Newtonian laws, and many people thought that was impossible. People were right; almost no one would use this theory at the time.</p>
-          <p class="body-lg" style="margin-top:1rem">But Einstein, knowing that his theory was correct, realised that Newtonian gravity couldn’t be true because it would violate special relativity, so it had to be revised. He concluded that instead of acting immediately, gravitational waves must propagate through space at the speed of light.</p>
-          <p class="body-lg" style="margin-top:1rem">Einstein used Maxwell’s equations of electromagnetism together with mechanics to ensure that Newtonian gravity obeyed the same principle. He performed thought experiments to figure out how gravity actually works and realised he could not derive the solution from his current theory. So he had to work on a completely new theory, one that is more refined and in-depth than the current theory.</p>
-        </div>
-        <div>
-          <span class="kicker">The equivalence principle</span>
-          <h2 style="font-size:clamp(2.8rem,5vw,4.5rem);margin-bottom:1rem">Gravity and acceleration</h2>
-          <p class="body-lg">One day, he realises that according to Newtonian gravity, a body in free fall doesn’t feel its own weight. Einstein realised that the two things that needed to be equal for this to happen were not a coincidence.</p>
-          <p class="body-lg" style="margin-top:1rem">He imagined an observer in a sealed box accelerating at a constant rate, realising that there would be no way for the observer to determine if they were in the presence of a large gravitational field or accelerating through outer space. They would feel a force pushing them towards the bottom of the box just as gravity would.</p>
-          <p class="body-lg" style="margin-top:1rem">Einstein called this the equivalence principle. The gravitational force the observer feels is just an authentic homogeneous gravitational field, and the only way for the observer to determine that they are in an authentic gravitational field is to stop accelerating or change the rate of acceleration and see if anything changes. This principle states that physics behaves the same way in all frames of reference in which an observer is accelerating at one constant rate.</p>
-        </div>
-      </div>
-
-      <div class="row row-rev reveal" style="margin-top:2rem">
-        <div>
-          <span class="kicker">Spacetime geometry</span>
-          <h2 style="font-size:clamp(2.8rem,5vw,4.5rem);margin-bottom:1rem">Space and time unite</h2>
-          <p class="body-lg">Soon after Einstein realised this, Hermann Minkowski coincidentally developed a four-dimensional formulation of special relativity in which space and time were intertwined. Einstein used this spacetime to develop his theory.</p>
-          <p class="body-lg" style="margin-top:1rem">Einstein realised the possibility that a mass would curve the spacetime around it, causing objects to follow a ‘straight’ path in that curved geometry, causing them to move towards the mass. He started doing thought experiments in outer space.</p>
-          <p class="body-lg" style="margin-top:1rem">He imagined a photon travelling in a stationary rocket from one end to the other, and it travelled straight. Then he applied a constant acceleration of 9.8m/s² and shot the photon. From inside the ship, the photon would appear to move very slightly downwards. Using the equivalence principle, he concluded that light would bend the same way on Earth.</p>
-          <p class="body-lg" style="margin-top:1rem">He concluded that this happened because light travels in a ‘straight’ path along curved spacetime. Masses pull on spacetime, which causes objects travelling through spacetime to curve towards the masses.</p>
+          <p class="body-lg">In 1905, Einstein published the special theory of relativity, a theory that would change the world. At the time, it was highly controversial because it contradicted Newtonian laws, and many people thought that was impossible. People were right; almost no one would use this theory at the time. But Einstein, knowing that his theory was correct, realised that Newtonian gravity couldn’t be true because it would violate special relativity, so it had to be revised. He concluded that instead of acting immediately, gravitational waves must propagate through space at the speed of light. Einstein used Maxwell’s equations of electromagnetism together with mechanics to ensure that Newtonian gravity obeyed the same principle. Einstein performed thought experiments to figure out how gravity actually works. He noticed that he could not derive the solution from his current theory. So he had to work on a completely new theory, one that is more refined and in-depth than the current theory.</p>
         </div>
 
-        <div>
-          <span class="kicker">General relativity</span>
-          <h2 style="font-size:clamp(2.8rem,5vw,4.5rem);margin-bottom:1rem">From thought to equations</h2>
-          <p class="body-lg">Now all Einstein needed to do was find the correct geometry for this theory and make mathematical equations. When Einstein moved to Zurich, he found that the correct geometry for his new theory was Riemannian geometry, since it applies to curved surfaces rather than to flat ones.</p>
-          <p class="body-lg" style="margin-top:1rem">To use this, he would have to write his equations to describe motion on curved surfaces. In order to come up with new equations for curved spacetime, he asked Grossmann to help him with the complicated mathematics and said that he would deal with the physics himself. They spent three years working relentlessly until they finished it. This new theory replaced Newton’s gravity, and he called it the general theory of relativity.</p>
-          <p class="body-lg" style="margin-top:1rem">Even though Einstein had the formulas derived and his theory done, he still couldn’t find an exact solution to his equations. But the papers Einstein wrote managed to travel to the war zone during World War I, where they reached Karl Schwarzschild.</p>
-          <p class="body-lg" style="margin-top:1rem">Schwarzschild was delighted to take a break from the war, and he said, in his note to Einstein, "The war treated me kind enough, despite the heavy gunfire, to allow me to get away from it all and take this walk in the land of your ideas." He worked on Einstein’s equations by hyper-simplifying the universe to where there is only one mass in the universe, one that is electrically neutral and spherically symmetric. In a matter of weeks, he developed the formula to solve for any curve in spacetime, given that you know the mass and distance to the object; this was the Schwarzschild solution. This solution consequently created the Schwarzschild radius, or the radius an object must be compressed to for it to become a black hole.</p>
+        <div class="history-segment">
+          <p class="body-lg">One day, he realises that according to Newtonian gravity, a body in free fall doesn’t feel its own weight. Einstein realised that the two things that needed to be equal for this to happen were not a coincidence. He imagined an observer in a sealed box accelerating at a constant rate, realising that there would be no way for the observer to determine if they were in the presence of a large gravitational field or accelerating through outer space. This would be true because they would feel a force pushing them towards the bottom of the box just as gravity would. Einstein called this the equivalence principle. The gravitational force the observer feels is just an authentic homogeneous gravitational field, and the only way for the observer to determine that they are in an authentic gravitational field is to stop accelerating or change the rate of acceleration, and see if they feel anything change. This principle states that physics behaves the same way in all frames of reference in which an observer is accelerating at one constant rate.</p>
         </div>
-      </div>
 
-      <div class="row reveal" style="margin-top:2rem">
-        <div>
-          <span class="kicker">Event horizon</span>
-          <h2 style="font-size:clamp(2.8rem,5vw,4.5rem);margin-bottom:1rem">A boundary unlike any other</h2>
-          <p class="body-lg">After Einstein received the letter from Schwarzschild, he was delighted with the findings. But after the solution was released to the general public, two flaws in his solution were uncovered. When r = r[s] (when the radius is the Schwarzschild radius), or when r = 0, the escape velocity shoots up to infinity.</p>
-          <p class="body-lg" style="margin-top:1rem">These points are two very important parts of a black hole: the famous event horizon and the singularity. The main issue here was the event horizon (the singularity is important later). The event horizon, which we will talk about a lot, is the point where time stops flowing forward, but inward, the line where time stops.</p>
-          <p class="body-lg" style="margin-top:1rem">But Einstein thought such a thing could never exist; others thought it went against the laws of “Nature,” and there would be a thing stopping that from happening. So began the great research of disproving and proving black holes.</p>
+        <div class="history-segment">
+          <p class="body-lg">Soon after Einstein realised this, Hermann Minkowski coincidentally developed a four-dimensional formulation of special relativity in which space and time were intertwined. Einstein used this spacetime to develop his theory. Einstein had realised the possibility that a mass would curve the spacetime around it, causing objects to follow a ‘straight’ path in that curved geometry, causing it to move towards the mass. So, Einstein started doing thought experiments in outer space. He imagined a photon travelling in a stationary rocket from one end to the other, and it travelled straight. Then he applied a constant acceleration of 9.8m/s2 and then shot the photon. Einstein realised that the photon would move very slightly downwards from the perspective of someone inside the ship. Then, using the equivalence principle, he concluded that the photon would move the same distance on Earth as well. He concluded that this happened due to the light travelling in a ‘straight’ path along a curved spacetime. This led him to conclude that masses pull on spacetime, which causes objects travelling through the spacetime to curve towards the masses.</p>
         </div>
-        <div>
-          <span class="kicker">Stellar collapse</span>
-          <h2 style="font-size:clamp(2.8rem,5vw,4.5rem);margin-bottom:1rem">How stars become black holes</h2>
-          <p class="body-lg">Now Pauli’s exclusion principle states that no two fermions, such as electrons, can occupy the same space. What does this mean? Well, since Heisenberg’s Uncertainty Principle states that you cannot know both a particle’s momentum and position with absolute certainty, and as each electron gets constrained in space, its uncertainty in momentum would have to increase, therefore causing it to vibrate and wiggle around faster and faster.</p>
-          <p class="body-lg" style="margin-top:1rem">Because the white dwarf was becoming so condensed, the atoms were vibrating so much that they prevented the star from collapsing any further. This is known as the Chandrasekhar limit, equivalent to about 1.44 solar masses.</p>
-          <p class="body-lg" style="margin-top:1rem">Now, as the world breathed a sigh of relief, a scientist by the name Subrahmanyan Chandrasekhar was going to prove that statement wrong. He was an Indian astrophysicist, only 19 years old, and while travelling on a British ship in 1930, he found out that a star can collapse past the white dwarf and pass the Chandrasekhar limit.</p>
-          <p class="body-lg" style="margin-top:1rem">People discovered that when a huge star passes the Chandrasekhar limit, the atoms cannot vibrate faster than light, and they can not hold the star up, and it collapses further. This causes the protons and electrons to fuse, forming neutrons and neutrinos through neutronization, and collapse into a neutron star. However, there is a limit to neutron stars to prevent them from collapsing as well. The Tolman-Oppenheimer-Volkoff or TOV Limit is approximately 2.17 solar masses.</p>
-          <p class="body-lg" style="margin-top:1rem">If the star is past the TOV limit, there is nothing to keep it from collapsing, and it folds inwards on itself. At this point, the radius is below the Schwarzschild radius, and it has become a black hole.</p>
+
+        <div class="history-segment">
+          <p class="body-lg">Now all Einstein needed to do was find the correct geometry for this theory and make mathematical equations. When Einstein moved to Zurich, he found that the correct geometry for his new theory was Riemannian geometry, since it applies to curved surfaces rather than to flat ones. To use this, he would have to write his equations to describe motion on curved surfaces. In order to come up with new equations for curved spacetime, he asked Grossmann to help him with the complicated mathematics and said that he would deal with the physics himself. They spent three years working relentlessly until they finished it. This new theory replaced Newton’s gravity, and he called it the general theory of relativity.</p>
+        </div>
+
+        <div class="history-segment">
+          <p class="body-lg">Even though Einstein had the formulas derived and his theory done, he still couldn’t find an exact solution to his equations. But the papers Einstein wrote managed to travel to the war zone during World War I, where they reached Karl Schwarzschild. Schwartzchild was delighted to take a break from the war, and he said, in his note to Einstein, "The war treated me kind enough, despite the heavy gunfire, to allow me to get away from it all and take this walk in the land of your ideas." He worked on Einstein’s equations by hyper-simplifying the universe to where there is only one mass in the universe, one that is electrically neutral and spherically symmetric. In a matter of weeks, he developed the formula to solve for any curve in spacetime, given that you know the mass and distance to the object; this was the Schwarzschild solution. This solution consequently created the Schwarzschild radius, or the radius an object must be compressed to for it to become a black hole.</p>
+        </div>
+
+        <div class="history-segment">
+          <p class="body-lg">After Einstein received the Letter from Schwarzschild, he was delighted with the findings, but after the solution was released to the general public, two flaws in his solution were uncovered. When r =r[s] (When the radius is the Schwarzhild radius), or when r=0, the escape velocity shoots up to infinity. These points are two very important parts of a black hole: the famous event horizon and the singularity. The main issue here was the event horizon (the singularity is important later). The event horizon, which we will talk about a lot, is the point where time stops flowing forward, but inward, the line where time stops. But Einstein thought such a thing could never exist, others thought it went against the laws of “Nature,” and there would be a thing stopping that from happening. So began the great research of disproving/proving black holes.</p>
+        </div>
+
+        <div class="history-segment">
+          <p class="body-lg">Now Pauli’s exclusion principle states that no two fermions, such as electrons, can occupy the same space. What does this mean? Well, since Heisenberg’s Uncertainty Principle states that you cannot know both a particle’s momentum and position with absolute certainty, and as each electron gets constrained in space, its uncertainty in momentum would have to increase, therefore causing it to vibrate and wiggle around faster and faster. Because the white dwarf was becoming so condensed, the atoms were vibrating so much that they prevented the star from collapsing any further. This is known as the Chandrasekhar limit, equivalent to about 1.44 solar masses.</p>
+        </div>
+
+        <div class="history-segment">
+          <p class="body-lg">Now, as the world breathed a sigh of relief, a scientist by the name Subrahmanyan Chandrasekhar was going to prove that statement wrong. He was an Indian astrophysicist, only 19 years old, and while travelling on a British ship in 1930, he found out that a star can collapse past the white dwarf and pass the Chandrasekhar limit. People discovered that when a huge star passes the Chandrasekhar limit, the atoms cannot vibrate faster than light, and they can not hold the star up, and it collapses further. This causes the protons and electrons to fuse, forming neutrons and neutrinos through neutronization, and collapse into a neutron star. However, there is a limit to neutron stars to prevent them from collapsing as well. The Tolman-Oppenheimer-Volkoff or TOV Limit is approximately 2.17 solar masses.</p>
+          <p class="body-lg" style="margin-top:1rem">If the star is past the TOV limit, there is nothing to keep it from collapsing, and it folds inwards on itself. At this point, the radius is below the Schwartzchild radius, and it has become a black hole.</p>
         </div>
       </div>
     </div>
   </section>
-
-</div>
-
-
 <!-- ═══════════════════════════════════════════════════════════════
      NON-ROTATING BLACK HOLES
 ═══════════════════════════════════════════════════════════════ -->
@@ -1158,7 +1139,7 @@
   <div class="pg-header bg-ink">
     <div class="wrap">
       <p class="trail">Rad Relativity <span>Learn</span></p>
-      <h1>THE SCIENCE<br>OF THE VOID</h1>
+      <h1>The pregnant<br>black hole</h1>
       <p>A plain-language guide to the physics of black holes — how they work, why they exist, and what they tell us about space and time.</p>
     </div>
   </div>
