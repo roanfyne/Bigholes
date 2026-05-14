@@ -29,11 +29,10 @@
     --surface-hi: #141210;
     --border:     #221e18;
     --border-hi:  #3a3020;
-    /* warm accent palette */
-    --cyan:   #ffaa33;   /* main accent — warm amber    */
-    --violet: #ff6600;   /* secondary  — deep orange    */
-    --pink:   #ff3300;   /* tertiary   — warm red       */
-    --green:  #ffd700;   /* positive   — gold           */
+    --cyan:   #ffaa33;
+    --violet: #ff6600;
+    --pink:   #ff3300;
+    --green:  #ffd700;
     --orange: #ff8800;
     --yellow: #ffe066;
     --white:  #ffffff;
@@ -52,16 +51,10 @@
   ::-webkit-scrollbar-thumb { background: var(--violet); }
   ::selection { background: var(--violet); color: #000; }
 
-  /* ═══════════════════════════════════════════════════════════════
-     PAGE SYSTEM
-  ═══════════════════════════════════════════════════════════════ */
   .page { display: none; min-height: 100vh; padding-top: 60px; }
   .page.active { display: block; animation: fadeIn .35s ease; }
   @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
 
-  /* ═══════════════════════════════════════════════════════════════
-     LAYOUT
-  ═══════════════════════════════════════════════════════════════ */
   .wrap    { width: min(1100px, 92vw); margin: 0 auto; }
   .wrap-sm { width: min(740px,  92vw); margin: 0 auto; }
   .wrap-lg { width: min(1340px, 96vw); margin: 0 auto; }
@@ -79,9 +72,6 @@
   section.tight { padding: 3.5rem 0; }
   section.flush { padding: 0; }
 
-  /* ═══════════════════════════════════════════════════════════════
-     SPECTRUM / FIRE GRADIENT
-  ═══════════════════════════════════════════════════════════════ */
   .spectrum {
     background: linear-gradient(90deg, #ff2200, #ff5500, #ff8800, #ffaa33, #ffd700, #fff5cc, #ffd700, #ffaa33, #ff8800, #ff5500, #ff2200);
     background-size: 300%;
@@ -98,9 +88,6 @@
     animation: specMove 5s linear infinite;
   }
 
-  /* ═══════════════════════════════════════════════════════════════
-     TYPOGRAPHY
-  ═══════════════════════════════════════════════════════════════ */
   h1, h2, h3, h4 { font-family: var(--display); letter-spacing: .03em; line-height: .95; font-weight: 400; }
   .kicker { font-family:var(--mono); font-size:.6rem; letter-spacing:.22em; text-transform:uppercase; color:var(--cyan); display:block; margin-bottom:.75rem; }
   .overline { font-family:var(--mono); font-size:.6rem; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); display:block; margin-bottom:.4rem; }
@@ -111,9 +98,6 @@
   blockquote { border-left: 2px solid var(--violet); padding: .75rem 0 .75rem 1.5rem; margin: 1.5rem 0; font-style: italic; font-size: 1rem; color: var(--text); line-height: 1.75; }
   blockquote cite { display:block; margin-top:.5rem; font-family:var(--mono); font-size:.62rem; letter-spacing:.15em; text-transform:uppercase; color:var(--muted); font-style:normal; }
 
-  /* ═══════════════════════════════════════════════════════════════
-     NAV
-  ═══════════════════════════════════════════════════════════════ */
   nav { position:fixed; top:0; left:0; right:0; z-index:500; height:60px; display:flex; align-items:center; justify-content:space-between; padding:0 2.5rem; background:rgba(0,0,0,.94); border-bottom:1px solid var(--border); backdrop-filter:blur(10px); transition:border-color .3s; }
   .nav-logo { font-family:var(--display); font-size:1.35rem; letter-spacing:.1em; color:var(--text); cursor:pointer; user-select:none; }
   .nav-logo em { color:var(--cyan); font-style:normal; }
@@ -123,20 +107,13 @@
   .nav-menu button:hover  { color:var(--text); }
   .nav-menu button.active { color:var(--cyan); }
 
-  /* ═══════════════════════════════════════════════════════════════
-     PAGE HEADER
-  ═══════════════════════════════════════════════════════════════ */
   .pg-header { background:var(--ink); border-bottom:1px solid var(--border); padding:3.5rem 0 3rem; }
   .pg-header .trail { font-family:var(--mono); font-size:.58rem; letter-spacing:.2em; text-transform:uppercase; color:var(--dim); margin-bottom:1.25rem; }
   .pg-header .trail span { color:var(--cyan); }
   .pg-header h1 { font-size:clamp(3rem,6vw,5.5rem); margin-bottom:1rem; }
   .pg-header p { max-width:560px; }
 
-  /* ═══════════════════════════════════════════════════════════════
-     IMAGE SLOTS
-  ═══════════════════════════════════════════════════════════════ */
   .img-slot { position:relative; background:var(--surface); border:1px solid var(--border-hi); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.5rem; overflow:hidden; }
-  /* All 4 corner brackets drawn via background gradients */
   .img-slot::before {
     content:'';
     position:absolute;
@@ -153,7 +130,6 @@
     pointer-events:none;
     z-index:2;
   }
-  /* Subtle inner amber glow */
   .img-slot::after {
     content:'';
     position:absolute;
@@ -171,10 +147,6 @@
   .img-slot img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
   .img-caption { font-family:var(--mono); font-size:.6rem; letter-spacing:.12em; color:var(--dim); margin-top:.6rem; line-height:1.5; }
   
-  /* ═══════════════════════════════════════════════════════════════
-     IMAGE BORDER
-  ═══════════════════════════════════════════════════════════════ */
-
   @property --a {
   syntax: '<angle>';
   initial-value: 0deg;
@@ -182,26 +154,13 @@
   }
   @keyframes spin { to { --a: 1turn } }
 
-  .image-canvas {
-  position: relative;
-  }
-
+  .image-canvas { position: relative; }
   .image-canvas::before {
-  position: absolute;
-  inset: -6px;        
-  padding: 1px;       
-  border-radius: 0;   
-  background:
-    linear-gradient(#000 0 0) content-box,
-    conic-gradient(in hsl longer hue from var(--a),
-      rgb(255 0 0 / 1) 0 100%);
-  animation: spin 6s infinite linear;
-  content: '';
+  position: absolute; inset: -6px; padding: 1px; border-radius: 0;
+  background: linear-gradient(#000 0 0) content-box, conic-gradient(in hsl longer hue from var(--a), rgb(255 0 0 / 1) 0 100%);
+  animation: spin 6s infinite linear; content: '';
   }
 
-  /* ═══════════════════════════════════════════════════════════════
-     CARDS
-  ═══════════════════════════════════════════════════════════════ */
   .card { background:var(--ink); border:1px solid var(--border); padding:2rem; }
   .card h3 { font-size:clamp(1.4rem,2.5vw,2rem); margin-bottom:.75rem; }
   .card .card-num { font-family:var(--mono); font-size:.6rem; letter-spacing:.2em; color:var(--dim); margin-bottom:.5rem; display:block; }
@@ -210,9 +169,6 @@
   .card-lift:hover { border-color:var(--border-hi); transform:translateY(-2px); }
   .card-lift:hover::before { background:var(--cyan); }
 
-  /* ═══════════════════════════════════════════════════════════════
-     FACT ROWS / TABLES
-  ═══════════════════════════════════════════════════════════════ */
   .fact-table { margin-top:1.5rem; }
   .fact-row { display:flex; justify-content:space-between; align-items:baseline; padding:.55rem 0; border-bottom:1px solid var(--border); gap:1rem; }
   .fact-row:last-child { border-bottom:none; }
@@ -223,9 +179,6 @@
   .pull-stat-num { font-family:var(--display); font-size:clamp(3rem,7vw,5.5rem); line-height:1; letter-spacing:.03em; margin-bottom:.35rem; }
   .pull-stat-label { font-family:var(--mono); font-size:.6rem; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); }
 
-  /* ═══════════════════════════════════════════════════════════════
-     TAGS / BUTTONS
-  ═══════════════════════════════════════════════════════════════ */
   .tag { font-family:var(--mono); font-size:.55rem; letter-spacing:.18em; text-transform:uppercase; padding:.18rem .55rem; border:1px solid var(--border-hi); color:var(--muted); display:inline-block; margin:0 .3rem .4rem 0; }
   .tag-cyan   { border-color:var(--cyan);   color:var(--cyan); }
   .tag-violet { border-color:var(--violet); color:var(--violet); }
@@ -237,9 +190,6 @@
   .btn-hollow  { background:transparent; border:1px solid var(--border-hi); color:var(--muted); }
   .btn-hollow:hover  { border-color:var(--cyan); color:var(--cyan); }
 
-  /* ═══════════════════════════════════════════════════════════════
-     LISTS
-  ═══════════════════════════════════════════════════════════════ */
   .rule { border:none; border-top:1px solid var(--border); margin:3rem 0; }
   .num-list { list-style:none; counter-reset:n; margin-top:1rem; }
   .num-list li { counter-increment:n; display:flex; gap:1rem; padding:.7rem 0; border-bottom:1px solid var(--border); font-size:.9rem; color:var(--muted); line-height:1.7; }
@@ -250,9 +200,6 @@
   .dot-list.v li::before { background:var(--violet); }
   .dot-list.p li::before { background:var(--pink); }
 
-  /* ═══════════════════════════════════════════════════════════════
-     TIMELINE
-  ═══════════════════════════════════════════════════════════════ */
   .timeline { position:relative; padding-left:2.5rem; }
   .timeline::before { content:''; position:absolute; left:0; top:0; bottom:0; width:1px; background:linear-gradient(to bottom, var(--violet), var(--cyan), transparent); }
   .tl-item { position:relative; padding-left:1.5rem; margin-bottom:2.5rem; }
@@ -261,25 +208,16 @@
   .tl-title { font-family:var(--display); font-size:1.3rem; letter-spacing:.04em; margin-bottom:.4rem; }
   .tl-body  { font-size:.88rem; color:var(--muted); line-height:1.8; }
 
-  /* ═══════════════════════════════════════════════════════════════
-     DATA TABLE
-  ═══════════════════════════════════════════════════════════════ */
   .data-table { width:100%; border-collapse:collapse; }
   .data-table th { font-family:var(--mono); font-size:.57rem; letter-spacing:.18em; text-transform:uppercase; color:var(--dim); padding:.65rem 1rem; text-align:left; border-bottom:1px solid var(--border); }
   .data-table td { padding:.85rem 1rem; border-bottom:1px solid var(--border); font-family:var(--mono); font-size:.7rem; color:var(--muted); }
   .data-table tr:hover td { background:var(--surface); color:var(--text); }
   .data-table .hl { color:var(--cyan); }
 
-  /* ═══════════════════════════════════════════════════════════════
-     BACKGROUNDS
-  ═══════════════════════════════════════════════════════════════ */
   .bg-black   { background: var(--black); }
   .bg-ink     { background: var(--ink); }
   .bg-surface { background: var(--surface); }
 
-  /* ═══════════════════════════════════════════════════════════════
-     HERO
-  ═══════════════════════════════════════════════════════════════ */
   .hero { min-height:calc(100vh - 60px); display:flex; flex-direction:column; justify-content:flex-end; padding-bottom:5rem; position:relative; overflow:hidden; }
   .hero-bg { position:absolute; inset:0; background:var(--black); z-index:0; }
   .hero-bg img { width:100%; height:100%; object-fit:cover; opacity:.35; display:block; }
@@ -304,27 +242,12 @@
   .hero-meta-item .label { font-family:var(--mono); font-size:.55rem; letter-spacing:.2em; text-transform:uppercase; color:var(--dim); display:block; margin-bottom:.15rem; }
   .hero-meta-item .value { font-family:var(--display); font-size:1.6rem; letter-spacing:.04em; line-height:1; }
 
-  /* ═══════════════════════════════════════════════════════════════
-     WHITE SECTION (learn page "The Hole" segment)
-     Smooth gradient transition in/out from pure black to white
-  ═══════════════════════════════════════════════════════════════ */
   .white-section {
-    background: linear-gradient(to bottom,
-      #000 0%,
-      #111 4%,
-      #ffffff 10%,
-      #ffffff 90%,
-      #111 96%,
-      #000 100%
-    );
+    background: linear-gradient(to bottom, #000 0%, #111 4%, #ffffff 10%, #ffffff 90%, #111 96%, #000 100%);
     padding: 10rem 0;
     position: relative;
   }
-  .white-inner {
-    max-width: min(720px, 92vw);
-    margin: 0 auto;
-    padding: 0 2rem;
-  }
+  .white-inner { max-width: min(720px, 92vw); margin: 0 auto; padding: 0 2rem; }
   .white-inner h2 { color: #000; font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 1.25rem; }
   .white-inner h3 { color: #111; font-size: 1.5rem; margin-bottom: .75rem; font-family: var(--display); letter-spacing: .04em; }
   .white-inner p { color: #3a3a3a; }
@@ -332,16 +255,12 @@
   .white-inner .rule { border-color: #ddd; }
   .white-inner blockquote { border-left-color: #9b40ff; color: #111; }
   .white-inner blockquote cite { color: #888; }
-  /* Neon highlights on white bg — slightly desaturated to stay readable */
-  .hl-cyan   { color: #007a88; font-weight: 500; }  /* teal on white */
-  .hl-violet { color: #7700cc; font-weight: 500; }  /* purple on white */
-  .hl-pink   { color: #cc0044; font-weight: 500; }  /* deep pink on white */
-  .hl-orange { color: #cc5500; font-weight: 500; }  /* burnt orange on white */
-  .hl-gold   { color: #a07800; font-weight: 500; }  /* dark gold on white */
+  .hl-cyan   { color: #007a88; font-weight: 500; }
+  .hl-violet { color: #7700cc; font-weight: 500; }
+  .hl-pink   { color: #cc0044; font-weight: 500; }
+  .hl-orange { color: #cc5500; font-weight: 500; }
+  .hl-gold   { color: #a07800; font-weight: 500; }
 
-  /* ═══════════════════════════════════════════════════════════════
-     FOOTER
-  ═══════════════════════════════════════════════════════════════ */
   footer { background:var(--ink); border-top:1px solid var(--border); padding:2.5rem 0 2rem; }
   .footer-inner { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.5rem; }
   .footer-logo { font-family:var(--display); font-size:1.4rem; letter-spacing:.1em; }
@@ -354,9 +273,6 @@
   .footer-copy { font-family:var(--mono); font-size:.58rem; letter-spacing:.15em; color:var(--dim); }
   .spec-line-footer { width:80px; }
 
-  /* ═══════════════════════════════════════════════════════════════
-     SECRET SIMULATOR MODAL
-  ═══════════════════════════════════════════════════════════════ */
   .bh-modal-overlay {
     display: none; position:fixed; inset:0; z-index:2000;
     background: rgba(0,0,0,.97);
@@ -368,25 +284,12 @@
     position:absolute; top:1.5rem; right:2rem;
     font-family:var(--mono); font-size:.65rem; letter-spacing:.15em;
     text-transform:uppercase; color:var(--muted);
-    background:none; border:none; cursor:pointer;
-    transition:color .2s;
+    background:none; border:none; cursor:pointer; transition:color .2s;
   }
   .bh-modal-close:hover { color:var(--cyan); }
-  #bh-sim-canvas {
-    display:block;
-    width: min(700px, 92vw);
-    height: min(700px, 92vw);
-    border: 1px solid var(--border);
-  }
-  .bh-sim-label {
-    font-family:var(--mono); font-size:.58rem; letter-spacing:.2em;
-    text-transform:uppercase; color:var(--dim); margin-top:1rem;
-    text-align:center;
-  }
+  #bh-sim-canvas { display:block; width: min(700px, 92vw); height: min(700px, 92vw); border: 1px solid var(--border); }
+  .bh-sim-label { font-family:var(--mono); font-size:.58rem; letter-spacing:.2em; text-transform:uppercase; color:var(--dim); margin-top:1rem; text-align:center; }
 
-  /* ═══════════════════════════════════════════════════════════════
-     RESPONSIVE
-  ═══════════════════════════════════════════════════════════════ */
   @media (max-width: 900px) {
     nav { padding: 0 1.2rem; }
     .nav-menu { display: none; }
@@ -396,41 +299,15 @@
     .footer-inner { flex-direction:column; align-items:flex-start; }
   }
 
-  /* ═══════════════════════════════════════════════════════════════
-     KATEX — equation styling
-  ═══════════════════════════════════════════════════════════════ */
-  /* Block display equations — centred, spaced, amber accent line */
-  .katex-display {
-    margin: 2rem 0;
-    padding: 1.5rem 2rem;
-    background: var(--surface);
-    border-left: 2px solid var(--cyan);
-    overflow-x: auto;
-  }
-  /* Override KaTeX default white colour to match our text */
+  .katex-display { margin: 2rem 0; padding: 1.5rem 2rem; background: var(--surface); border-left: 2px solid var(--cyan); overflow-x: auto; }
   .katex { color: var(--text); font-size: 1.05em; }
-  /* Inline math — nudge spacing slightly */
   .katex-inline { color: var(--cyan); }
-
-  /* equation label row — number + description under a block eq */
-  .eq-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: .4rem 2rem .2rem;
-    margin-top: -.5rem;
-    margin-bottom: 1.5rem;
-  }
+  .eq-row { display: flex; justify-content: space-between; align-items: baseline; padding: .4rem 2rem .2rem; margin-top: -.5rem; margin-bottom: 1.5rem; }
   .eq-num   { font-family: var(--mono); font-size: .58rem; letter-spacing: .18em; color: var(--dim); }
   .eq-label { font-family: var(--mono); font-size: .6rem;  letter-spacing: .12em; color: var(--muted); text-align: right; max-width: 60%; }
-
-  /* on the white section, equations need dark text */
   .white-inner .katex { color: #111; }
   .white-inner .katex-display { background: #f4f4f4; border-left-color: #7700cc; }
 
-  /* ═══════════════════════════════════════════════════════════════
-     SCROLL REVEAL
-  ═══════════════════════════════════════════════════════════════ */
   .reveal { opacity:0; transform:translateY(20px); transition:opacity .6s ease, transform .6s ease; }
   .reveal.in { opacity:1; transform:none; }
   .reveal.d1 { transition-delay:.08s; }
@@ -441,9 +318,6 @@
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════════════════════════
-     NAV
-═══════════════════════════════════════════════════════════════ -->
 <nav>
   <span class="nav-logo" onclick="go('home')">RAD <em>R</em>ELATIVITY</span>
   <ul class="nav-menu" id="nav">
@@ -466,7 +340,6 @@
   <div class="hero">
     <div class="hero-bg-placeholder"></div>
 
-
     <svg class="hero-rings" viewBox="0 0 680 680" fill="none">
       <defs>
         <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
@@ -476,25 +349,14 @@
           <stop offset="100%" stop-color="#000" stop-opacity="0"/>
         </radialGradient>
       </defs>
-      <!-- rangs -->
-      <g class="ring ring-1">
-        <ellipse cx="340" cy="340" rx="285" ry="112" stroke="rgba(255,140,20,.10)" stroke-width="1.5"/>
-      </g>
-      <g class="ring ring-2">
-        <ellipse cx="340" cy="340" rx="245" ry="94"  stroke="rgba(255,210,60,.07)"  stroke-width="1"/>
-      </g>
-      <g class="ring ring-3">
-        <ellipse cx="340" cy="340" rx="205" ry="78"  stroke="rgba(255,80,0,.06)"   stroke-width="1"/>
-      </g>
-     
+      <g class="ring ring-1"><ellipse cx="340" cy="340" rx="285" ry="112" stroke="rgba(255,140,20,.10)" stroke-width="1.5"/></g>
+      <g class="ring ring-2"><ellipse cx="340" cy="340" rx="245" ry="94"  stroke="rgba(255,210,60,.07)"  stroke-width="1"/></g>
+      <g class="ring ring-3"><ellipse cx="340" cy="340" rx="205" ry="78"  stroke="rgba(255,80,0,.06)"   stroke-width="1"/></g>
       <circle cx="340" cy="340" r="88"  stroke="rgba(255,150,30,.18)" stroke-width="1.5"/>
       <circle cx="340" cy="340" r="74"  stroke="rgba(255,200,80,.10)" stroke-width="1"/>
- 
       <ellipse cx="340" cy="340" rx="160" ry="40" fill="none" stroke="rgba(255,120,10,.12)" stroke-width="8"/>
-   
       <circle cx="340" cy="340" r="54"  fill="url(#coreGlow)"/>
       <circle cx="340" cy="340" r="36"  fill="#000"/>
- 
       <circle cx="110" cy="75"  r="1"   fill="rgba(255,240,200,.3)"/>
       <circle cx="580" cy="120" r=".8"  fill="rgba(255,235,180,.25)"/>
       <circle cx="620" cy="565" r="1.2" fill="rgba(255,240,200,.3)"/>
@@ -507,7 +369,7 @@
     <div class="hero-content wrap">
       <p class="hero-eyebrow">Rad Relativity — 2026</p>
       <h1 class="spectrum">BLACK<br>HOLES</h1>
-      <p class="hero-sub">defenition of a BLACK HOLE.</p>
+      <p class="hero-sub">A deep dive into the physics of black holes, from Einstein's relativity to rotating Kerr geometry.</p>
       <div class="hero-meta">
         <div class="hero-meta-item">
           <span class="label">Est. black holes</span>
@@ -556,18 +418,36 @@
     </div>
   </section>
 
-  
   <!-- WIDE IMAGE -->
   <section class="flush">
     <div class="wrap-lg">
       <div class="img-slot img-wide reveal">
         <img src="cinimatic.jpg" alt="absolute Cinima">
       </div>
-      <p class="img-caption" style="padding:0 2vw .5rem">Figure 2 — A artists depiction of a black hole</p>
+      <p class="img-caption" style="padding:0 2vw .5rem">Figure 2 — An artist's depiction of a black hole</p>
     </div>
   </section>
 
- 
+  <footer>
+    <div class="wrap">
+      <div class="footer-inner">
+        <div class="footer-logo">RAD <em>R</em>ELATIVITY</div>
+        <ul class="footer-nav">
+          <li><button onclick="go('home')">Home</button></li>
+          <li><button onclick="go('rele')">Relativity</button></li>
+          <li><button onclick="go('his')">History</button></li>
+          <li><button onclick="go('types')">Non-Rotating BH</button></li>
+          <li><button onclick="go('learn')">Rotating BH</button></li>
+          <li><button onclick="go('problems')">Problems</button></li>
+          <li><button onclick="go('data')">Data</button></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 RAD RELATIVITY</span>
+        <div class="spec-line spec-line-footer"></div>
+      </div>
+    </div>
+  </footer>
 
 </div><!-- /home -->
 
@@ -581,22 +461,21 @@
     <div class="wrap">
       <p class="trail">Rad Relativity <span>Relativity</span></p>
       <h1>EINSTEIN<br>BROKE PHYSICS<br>AND BROKE IT A FEW<br>MORE TIMES<br>AND THEN HE EXPLAINED IT</h1>
-      <p>A compleatly reliable and accurate discription of Eienstiens Theory oF Relativity.</p>
+      <p>A completely reliable and accurate description of Einstein's Theory of Relativity.</p>
     </div>
   </div>
 
-  <!-- DISCLAIMER-->
   <section class="bg-ink">
     <div class="wrap">
       <div class="row reveal">
         <div>
-          <span class="kicker">Overview? Into? Don't know?</span>
+          <span class="kicker">Overview</span>
           <h2 style="font-size:clamp(2.5rem,5vw,4rem);margin-bottom:1rem">SPACE, TIME, A LITTLE SALT <br>AND THE AUDACITY<br>OF ALBERT EINSTEIN</h2>
           <p class="body-lg">The Theory of Relativity is one of the most important ideas in modern physics, developed by Albert Einstein in the early 20th century. It explains how space, time, and gravity work — especially when objects move very fast or when gravity is extremely strong.</p>
           <p>Einstein's theory explains that space and time are connected through spacetime, that time is relative depending on motion and gravity, and that mass and energy are related. Both special and general relativity have been tested many times. <strong style="color:var(--cyan)">Relativity is not theoretical.</strong></p>
           <blockquote style="margin-top:1.5rem">
             Disclaimer: All of this is simplified for easier reading and understanding, and is as accurate as possible in this form.
-            <cite>— Me, the Author</cite>
+            <cite>— The Author</cite>
           </blockquote>
         </div>
         <div>
@@ -628,7 +507,6 @@
     </div>
   </section>
 
-  <!-- SPECIAL RELATIVITY HEADER -->
   <section class="bg-black tight">
     <div class="wrap reveal">
       <span class="overline">Act One</span>
@@ -637,7 +515,6 @@
     </div>
   </section>
 
-  <!-- THE SEALED TRAIN -->
   <section class="bg-ink">
     <div class="wrap">
       <div class="row reveal">
@@ -667,7 +544,6 @@
     </div>
   </section>
 
-  <!-- LENGTH CONTRACTION -->
   <section class="bg-black">
     <div class="wrap">
       <span class="overline">Special Relativity — Effect 01</span>
@@ -681,9 +557,9 @@
         </div>
         <div>
           <div class="fact-table">
-            <div class="fact-row"><span class="fact-key">$L_0$ — Proper Length</span><span class="fact-val">Length in the object's own rest frame (not moving)</span></div>
+            <div class="fact-row"><span class="fact-key">$L_0$ — Proper Length</span><span class="fact-val">Length in the object's own rest frame</span></div>
             <div class="fact-row"><span class="fact-key">$L$ — Contracted Length</span><span class="fact-val">Shorter length seen by a moving observer</span></div>
-            <div class="fact-row"><span class="fact-key">$v$ — Velocity</span><span class="fact-val">Speed of the object relative to the observer</span></div>
+            <div class="fact-row"><span class="fact-key">$v$ — Velocity</span><span class="fact-val">Speed of the object relative to observer</span></div>
             <div class="fact-row"><span class="fact-key">$c$ — Speed of Light</span><span class="fact-val">Universal speed limit ($\approx3\times10^8$ m/s)</span></div>
             <div class="fact-row"><span class="fact-key">$\gamma$ — Lorentz Factor</span><span class="fact-val accent">$\gamma = 1\,/\,\sqrt{1 - v^2/c^2}$</span></div>
           </div>
@@ -698,7 +574,7 @@
       </div>
     </div>
   </section>
-<!-- TIME DILATION — SETUP -->
+
   <section class="bg-ink">
     <div class="wrap">
       <span class="overline">Special Relativity — Effect 04</span>
@@ -723,7 +599,6 @@
     </div>
   </section>
 
-  <!-- TIME DILATION — DERIVATION + FORMULA -->
   <section class="bg-black">
     <div class="wrap">
       <div class="row reveal">
@@ -753,7 +628,6 @@
     </div>
   </section>
 
-  <!-- MUONS + TWIN PARADOX -->
   <section class="bg-ink">
     <div class="wrap">
       <span class="kicker">Living Proof</span>
@@ -762,7 +636,7 @@
         <div>
           <span class="overline">Example 01</span>
           <h3 style="font-size:1.8rem;margin-bottom:.75rem;font-family:var(--display)">THE IMMORTAL MUON</h3>
-          <p>Muons are created when cosmic rays — high-energy particles from space, which you should have learned about from science — strike nuclei in the upper atmosphere. At rest, a muon's average lifetime is about 2.2 microseconds; far too short to travel the ~18 km to sea level before decaying.</p>
+          <p>Muons are created when cosmic rays — high-energy particles from space — strike nuclei in the upper atmosphere. At rest, a muon's average lifetime is about 2.2 microseconds; far too short to travel the ~18 km to sea level before decaying.</p>
           <p style="margin-top:.75rem">Logically, muons should never reach the ground. Yet many are observed at sea level, confirmed by experiments on Mount Washington. Using the time dilation formula, their lifetime as seen from Earth can be about <strong style="color:var(--cyan)">ten times longer</strong> than their proper lifetime — enough to travel several kilometres and reach the sensors.</p>
         </div>
         <div>
@@ -776,7 +650,6 @@
     </div>
   </section>
 
-  <!-- GENERAL RELATIVITY HEADER -->
   <section class="bg-black tight">
     <div class="wrap reveal">
       <span class="overline">Part Two</span>
@@ -786,7 +659,6 @@
     </div>
   </section>
 
-  <!-- GRAVITY = CURVED SPACETIME + RIVER -->
   <section class="bg-ink">
     <div class="wrap">
       <div class="row reveal">
@@ -813,7 +685,6 @@
     </div>
   </section>
 
-  <!-- SHEET VISUALIZATION -->
   <section class="bg-black">
     <div class="wrap">
       <span class="overline">Visualisation</span>
@@ -823,9 +694,9 @@
         <div>
           <p>The <strong style="color:var(--cyan)">sheet visualisation</strong>: imagine a perfectly flat, infinitely stretchy sheet with a grid network. Place a large steel ball and a small ping pong ball on it. The steel ball creates a large curve; the ping pong ball rolls toward it, picking up speed.</p>
           <p style="margin-top:.75rem">Now roll the ping pong ball in from the side — it spirals briefly and hits the steel ball. The sheet is spacetime. The steel ball is a planet. The falling ping pong ball is an object under gravity; rolled from the side, it is an orbiting object.</p>
-          <p style="margin-top:.75rem">If you shoot the ping pong ball from a massive distance with enormous speed, it whizzes past without orbiting. Control that energy and it enters a stable orbit that decays much more slowly. <em style="color:var(--muted)">*You need a lot of speed, but maybe not THAT much.*</em></p>
+          <p style="margin-top:.75rem">If you shoot the ping pong ball from a massive distance with enormous speed, it whizzes past without orbiting. Control that energy and it enters a stable orbit that decays much more slowly.</p>
           <div class="img-slot img-16-9" style="margin-top:1.5rem">
-            <img src="sheet.webp" alt="the sheet visulization and the path pf light and mass">
+            <img src="sheet.webp" alt="the sheet visualisation and the path of light and mass">
           </div>
         </div>
         <div>
@@ -847,7 +718,6 @@
     </div>
   </section>
 
-  <!-- SCHWARZSCHILD SOLUTION -->
   <section class="bg-ink">
     <div class="wrap">
       <span class="kicker">General Relativity — Gravitational Time Dilation</span>
@@ -885,7 +755,6 @@
     </div>
   </section>
 
-  <!-- NO TRUE TIME -->
   <section class="bg-black">
     <div class="wrap-sm">
       <div class="reveal" style="text-align:center">
@@ -908,38 +777,39 @@
     <div class="wrap">
       <div class="footer-inner">
         <div class="footer-logo">RAD <em>R</em>ELATIVITY</div>
-                        <ul class="footer-nav">
+        <ul class="footer-nav">
           <li><button onclick="go('home')">Home</button></li>
           <li><button onclick="go('rele')">Relativity</button></li>
           <li><button onclick="go('his')">History</button></li>
-          <li><button onclick="go('types')">Types</button></li>
+          <li><button onclick="go('types')">Non-Rotating BH</button></li>
           <li><button onclick="go('learn')">Rotating BH</button></li>
+          <li><button onclick="go('problems')">Problems</button></li>
           <li><button onclick="go('data')">Data</button></li>
         </ul>
       </div>
       <div class="footer-bottom">
-        <span class="footer-copy">© 2026 RAD RELATIVITY — Black Hole Research</span>
+        <span class="footer-copy">© 2026 RAD RELATIVITY</span>
         <div class="spec-line spec-line-footer"></div>
       </div>
     </div>
   </footer>
 
-</div><!-- /explore -->
+</div><!-- /rele -->
+
 
 <!-- ═══════════════════════════════════════════════════════════════
-     History
+     HISTORY
 ═══════════════════════════════════════════════════════════════ -->
-<div id="page-his" class="page">  
+<div id="page-his" class="page">
 
   <div class="pg-header bg-ink">
-      <div class="wrap">
-        <p class="trail">Rad Relativity <span>History</span></p>
-        <h1>The reason behind how Einstein was depicted as a god dressed as a human</h1>
-        <p>The history of general relativity</p>
-      </div>
+    <div class="wrap">
+      <p class="trail">Rad Relativity <span>History</span></p>
+      <h1>The reason behind how Einstein was depicted as a god dressed as a human</h1>
+      <p>The history of general relativity</p>
+    </div>
   </div>
 
-    <!-- SPECTRUM BREAK -->
   <section class="bg-black tight">
     <div class="wrap reveal">
       <span class="overline">Act One</span>
@@ -948,7 +818,6 @@
     </div>
   </section>
 
-  <!-- SEGMENT 1 — Einstein begins the journey -->
   <section class="bg-ink">
     <div class="wrap">
       <div class="row reveal">
@@ -978,7 +847,6 @@
     </div>
   </section>
 
-  <!-- SEGMENT 2 — Equivalence Principle -->
   <section class="bg-black">
     <div class="wrap">
       <div class="row row-rev reveal">
@@ -1008,7 +876,6 @@
     </div>
   </section>
 
-  <!-- SEGMENT 3 — Curved Spacetime -->
   <section class="bg-ink">
     <div class="wrap">
       <div class="row reveal">
@@ -1038,7 +905,6 @@
     </div>
   </section>
 
-  <!-- SEGMENT 4 — Riemannian Geometry -->
   <section class="bg-black">
     <div class="wrap">
       <div class="row row-rev reveal">
@@ -1073,7 +939,6 @@
     </div>
   </section>
 
-  <!-- SPECTRUM BREAK -->
   <section class="bg-black tight">
     <div class="wrap reveal">
       <span class="overline">Act Two</span>
@@ -1082,7 +947,6 @@
     </div>
   </section>
 
-  <!-- SEGMENT 5 — Schwarzschild -->
   <section class="bg-ink">
     <div class="wrap">
       <div class="row reveal">
@@ -1090,7 +954,7 @@
           <span class="overline">1916</span>
           <span class="kicker">World War I</span>
           <h2 style="font-size:clamp(2.5rem,5vw,4rem);margin-bottom:1rem">A LETTER FROM<br>THE TRENCHES</h2>
-          <p class="body-lg">Even though Einstein had the formulas derived and his theory done, he still couldn't find an exact solution to his equations. But the papers Einstein wrote managed to travel to the war zone during World War I, where they reached Karl Schwarzschild. Schwartzchild was delighted to take a break from the war, and he said, in his note to Einstein, "The war treated me kind enough, despite the heavy gunfire, to allow me to get away from it all and take this walk in the land of your ideas." He worked on Einstein's equations by hyper-simplifying the universe to where there is only one mass in the universe, one that is electrically neutral and spherically symmetric. In a matter of weeks, he developed the formula to solve for any curve in spacetime, given that you know the mass and distance to the object; this was the Schwarzschild solution. This solution consequently created the Schwarzschild radius, or the radius an object must be compressed to for it to become a black hole.</p>
+          <p class="body-lg">Even though Einstein had the formulas derived and his theory done, he still couldn't find an exact solution to his equations. But the papers Einstein wrote managed to travel to the war zone during World War I, where they reached Karl Schwarzschild. Schwarzschild was delighted to take a break from the war, and he said, in his note to Einstein, "The war treated me kind enough, despite the heavy gunfire, to allow me to get away from it all and take this walk in the land of your ideas." He worked on Einstein's equations by hyper-simplifying the universe to where there is only one mass in the universe, one that is electrically neutral and spherically symmetric. In a matter of weeks, he developed the formula to solve for any curve in spacetime, given that you know the mass and distance to the object; this was the Schwarzschild solution. This solution consequently created the Schwarzschild radius, or the radius an object must be compressed to for it to become a black hole.</p>
           <blockquote style="margin-top:1.5rem">
             "The war treated me kind enough, despite the heavy gunfire, to allow me to get away from it all and take this walk in the land of your ideas."
             <cite>— Karl Schwarzschild, letter to Einstein, 1916</cite>
@@ -1107,7 +971,6 @@
     </div>
   </section>
 
-  <!-- SEGMENT 6 — Event Horizon Problem -->
   <section class="bg-black">
     <div class="wrap">
       <div class="row row-rev reveal">
@@ -1133,7 +996,6 @@
     </div>
   </section>
 
-  <!-- SPECTRUM BREAK -->
   <section class="bg-black tight">
     <div class="wrap reveal">
       <span class="overline">Act Three</span>
@@ -1142,7 +1004,6 @@
     </div>
   </section>
 
-  <!-- SEGMENT 7 — White Dwarf Barrier -->
   <section class="bg-ink">
     <div class="wrap">
       <div class="row reveal">
@@ -1167,7 +1028,6 @@
     </div>
   </section>
 
-  <!-- SEGMENT 8 — Birth of Black Holes -->
   <section class="bg-black">
     <div class="wrap">
       <div class="row row-rev reveal">
@@ -1228,20 +1088,22 @@
           <li><button onclick="go('home')">Home</button></li>
           <li><button onclick="go('rele')">Relativity</button></li>
           <li><button onclick="go('his')">History</button></li>
-          <li><button onclick="go('types')">Non-Rotating Black Holes</button></li>
-          <li><button onclick="go('learn')">Rotating Black Holes</button></li>
+          <li><button onclick="go('types')">Non-Rotating BH</button></li>
+          <li><button onclick="go('learn')">Rotating BH</button></li>
+          <li><button onclick="go('problems')">Problems</button></li>
           <li><button onclick="go('data')">Data</button></li>
         </ul>
       </div>
       <div class="footer-bottom">
-        <span class="footer-copy">© 2026 RAD RELATIVITY — Black Hole Research</span>
+        <span class="footer-copy">© 2026 RAD RELATIVITY</span>
         <div class="spec-line spec-line-footer"></div>
       </div>
     </div>
   </footer>
 
-</div>
-</div>
+</div><!-- /his -->
+
+
 <!-- ═══════════════════════════════════════════════════════════════
      NON-ROTATING BLACK HOLES
 ═══════════════════════════════════════════════════════════════ -->
@@ -1250,11 +1112,10 @@
   <div class="pg-header bg-ink">
     <div class="wrap">
       <p class="trail">Rad Relativity <span>NON-ROTATING BLACK HOLES</span></p>
-      <h1>Simplyfying black holes<br>not once but 3 times</h1>  
+      <h1>Simplifying black holes<br>not once but 3 times</h1>
     </div>
   </div>
 
-  <!-- Intro to non-rot black holes -->
   <section class="bg-ink">
     <div class="wrap">
       <span class="overline">Introduction</span>
@@ -1281,7 +1142,6 @@
     </div>
   </section>
 
-  <!-- SPECTRUM BREAK -->
   <section class="bg-black tight">
     <div class="wrap reveal">
       <span class="overline">The Mathematics of Fall</span>
@@ -1290,7 +1150,6 @@
     </div>
   </section>
 
-  <!-- Light Cones -->
   <section class="bg-ink">
     <div class="wrap">
       <span class="overline">Light Cones</span>
@@ -1299,7 +1158,7 @@
           <span class="kicker">Light cones</span>
           <h2 style="font-size:clamp(2.5rem,5vw,4.5rem);margin-bottom:1rem">Why light cones matter</h2>
           <p class="body-lg">Imagine you are in empty space and a flash of light emanates from your head, causing an ever-expanding sphere where the light was now, because nothing can travel faster than light. Everything that will ever happen to you will happen inside this bubble. We can cut down space to two dimensions and add time as an up and down dimension. What results is, as you move through time, or upwards through it, light spreads away, resulting in a cone on our graph. If we simplify this further, cutting the space down to just one dimension, distance, we get our light cone.</p>
-          <p class="body-lg" style="margin-top:1rem">Now, if you have two events in time, anywhere in time, but one is the “you” part of the light cone, the point in time where the cones converge, and one is out of the light cone. They could not have affected each other. You see, events can only affect each other, or influence each other, if they are in each other's light cone. But if you are near a mass where spacetime is curved, you need to take into account the geometry and must therefore use Einstein’s equations to determine the spacetime curvature.</p>
+          <p class="body-lg" style="margin-top:1rem">Now, if you have two events in time, anywhere in time, but one is the "you" part of the light cone, the point in time where the cones converge, and one is out of the light cone. They could not have affected each other. You see, events can only affect each other, or influence each other, if they are in each other's light cone. But if you are near a mass where spacetime is curved, you need to take into account the geometry and must therefore use Einstein's equations to determine the spacetime curvature.</p>
           <div class="card" style="margin-top:1.5rem;border-color:var(--border-hi)">
             <span class="kicker">Light Cone Rules</span>
             <ul class="dot-list">
@@ -1329,7 +1188,6 @@
     </div>
   </section>
 
-  <!-- Black hole graph -->
   <section class="bg-black">
     <div class="wrap">
       <span class="overline">Spacetime Diagrams</span>
@@ -1337,12 +1195,11 @@
         <div>
           <span class="kicker">Spacetime diagram</span>
           <h2 style="font-size:clamp(2.5rem,5vw,4.5rem);margin-bottom:1rem">Black hole graph</h2>
-          <p class="body-lg">Now that you know this, we can explain why the math proved that nothing could enter a black hole. This is a spacetime diagram where r=0 is the singularity, when the radius is 0, and r=2M is the event horizon, and since the black hole isn’t moving, time moves straight up. Now, if we draw incoming and outgoing light rays and see how they travel, we see that your future light cones point at 45° angles, and as we get closer to the event horizon, they start becoming narrower and narrower, as the distance that light can travel away, becomes less and less, until they point straight up at the event horizon, before pointing left towards the singularity after that. Now you might notice something strange about these incoming light rays. They never reach r=2M and instead asymptote at it as time goes to infinity. Yet they come back down and go towards the singularity, as they are mathematically connected. At this point, you might start to recognise the problem. Let's have someone falling into the black hole. Connor, as we will name him, would be forever trapped at the event horizon.</p>
+          <p class="body-lg">Now that you know this, we can explain why the math proved that nothing could enter a black hole. This is a spacetime diagram where r=0 is the singularity, when the radius is 0, and r=2M is the event horizon, and since the black hole isn't moving, time moves straight up. Now, if we draw incoming and outgoing light rays and see how they travel, we see that your future light cones point at 45° angles, and as we get closer to the event horizon, they start becoming narrower and narrower, as the distance that light can travel away, becomes less and less, until they point straight up at the event horizon, before pointing left towards the singularity after that. Now you might notice something strange about these incoming light rays. They never reach r=2M and instead asymptote at it as time goes to infinity. Yet they come back down and go towards the singularity, as they are mathematically connected. At this point, you might start to recognise the problem. Let's have someone falling into the black hole. Connor, as we will name him, would be forever trapped at the event horizon.</p>
           <p class="body-lg" style="margin-top:1rem">This troubled Einstein and many other scientists deeply, because how could a black hole form if nothing could ever enter it? Oppenheimer proposed a solution to this problem by saying that, to an outside observer, nothing can be seen entering, but if you were the one traveling in, you would pass through it.</p>
           <p class="body-lg" style="margin-top:1rem">If you haven't realized so far, the problem was the light cones. Look back at the previous graph. The light travels the same distance going away and into the black hole. The light is being slowed down in all directions. To change this, we need a modified equation.</p>
-          <p class="body-lg" style="margin-top:1rem">This changes the graph so that it is accurate to what happens to the light. If you see, the light cones tip inward, a very important detail that will explain later events. Now, this shows that there isn’t a physical object at the event horizon, and what we saw was just a poor choice of a coordinate system and perspective.</p>
-          <p class="body-lg" style="margin-top:1rem">If you change the black hole graph so that all of the incoming and outgoing light rays travel at 45 ° angles, then the singularity would get this curve, and you would see that the singularity becomes a moment in time instead of a place in space, explaining why the light cones tilted inwards after they crossed r=2M. This is called a Kruskal Diagram.</p>
-
+          <p class="body-lg" style="margin-top:1rem">This changes the graph so that it is accurate to what happens to the light. If you see, the light cones tip inward, a very important detail that will explain later events. Now, this shows that there isn't a physical object at the event horizon, and what we saw was just a poor choice of a coordinate system and perspective.</p>
+          <p class="body-lg" style="margin-top:1rem">If you change the black hole graph so that all of the incoming and outgoing light rays travel at 45° angles, then the singularity would get this curve, and you would see that the singularity becomes a moment in time instead of a place in space, explaining why the light cones tilted inwards after they crossed r=2M. This is called a Kruskal Diagram.</p>
           <div class="card card-lift" style="margin-top:2rem">
             <span class="card-num">Key facts</span>
             <h3>The Schwarzschild picture</h3>
@@ -1362,7 +1219,6 @@
     </div>
   </section>
 
-  <!-- Penrose diagram -->
   <section class="bg-ink">
     <div class="wrap">
       <span class="overline">Penrose Diagrams</span>
@@ -1373,9 +1229,9 @@
           <p class="body-lg">The problem with this graph is that it shows a very limited view of the universe, the black hole, and space near the event horizon. But what if we somehow could shrink the whole universe onto one page?</p>
           <p class="body-lg" style="margin-top:1rem">Now the Penrose diagram is a very special thing. What you are looking at is the whole Universe. Near every edge of this diagram, the distances shoot to infinity, but what distances? Just like in the light cone explanation, the Penrose diagram uses two dimensions, distance, and time. To the right and left, the x-axis, or distance, it oscillates to spacelike infinity. The same happens with time, or the y-axis, as it goes up or down, it oscillates to timelike infinity or near future or past. There is one very important thing about this diagram, which will use a lot to prove things. In this graph, light always travels at 45-degree angles.</p>
           <p class="body-lg" style="margin-top:1rem">If we take this Penrose diagram and combine it with our Kruskal diagram, we can create something that has every single thing we need in it.</p>
-          <p class="body-lg" style="margin-top:1rem">Through changing the graph, we have retained everything from the last graph, but by just changing the proportions of the lines on this image, we now have the entire universe trapped on a page. Here, you can see that the singularity is a flat line across the top, and our universe is to the right. Some strange things happen within the black hole. Time & distance switch axis in this graph, and in real life, this is shown by mysterious properties of the singularity. But before we go into that, let's provide some examples of what we could do with this graph.</p>
-          <p class="body-lg" style="margin-top:1rem">Now, let's return to Connor. Let’s say before he was destined to hurtle into space, he made a jetpack that, when put on him, could propel him forward at half the speed of light. (It also, for this example, made him immortal.) Then, he was launched into space, directly at a black hole. Now, Connor's “Light cone”, or for him, Connor's body velocity cone, would be half of the light cone’s, with lines at 22.5 degrees each. When the full cone is opposed or blocked by the event horizon, there is no future in which he is not destined to fall into a black hole. Because the max speed he can fly away at is half the speed of light, he will be trapped long before the event horizon. Once he is trapped and has crossed the event horizon, he is destined to hit the singularity.</p>
-          <p class="body-lg" style="margin-top:1rem">When he crosses the event horizon, the spatial dimension inwards and the dimension of time swap qualities. This causes the effect of the singularity becoming a point in time, like “tomorrow”, instead of a point in space, and now, all directions lead to the singularity. By accelerating in any direction, you will now just speed up the time it takes to reach the singularity. We can see this in the Penrose diagram: when he accelerates in any direction, he will actually decrease the distance needed to reach the singularity. [Images would be nice.] When you hit the singularity, time ends, and there is no future. An immortal being like Connor would never continue his endless journey, and his time would end with nothing he could do to change that.</p>
+          <p class="body-lg" style="margin-top:1rem">Through changing the graph, we have retained everything from the last graph, but by just changing the proportions of the lines on this image, we now have the entire universe trapped on a page. Here, you can see that the singularity is a flat line across the top, and our universe is to the right. Some strange things happen within the black hole. Time &amp; distance switch axis in this graph, and in real life, this is shown by mysterious properties of the singularity. But before we go into that, let's provide some examples of what we could do with this graph.</p>
+          <p class="body-lg" style="margin-top:1rem">Now, let's return to Connor. Let's say before he was destined to hurtle into space, he made a jetpack that, when put on him, could propel him forward at half the speed of light. (It also, for this example, made him immortal.) Then, he was launched into space, directly at a black hole. Now, Connor's "Light cone", or for him, Connor's body velocity cone, would be half of the light cone's, with lines at 22.5 degrees each. When the full cone is opposed or blocked by the event horizon, there is no future in which he is not destined to fall into a black hole. Because the max speed he can fly away at is half the speed of light, he will be trapped long before the event horizon. Once he is trapped and has crossed the event horizon, he is destined to hit the singularity.</p>
+          <p class="body-lg" style="margin-top:1rem">When he crosses the event horizon, the spatial dimension inwards and the dimension of time swap qualities. This causes the effect of the singularity becoming a point in time, like "tomorrow", instead of a point in space, and now, all directions lead to the singularity. By accelerating in any direction, you will now just speed up the time it takes to reach the singularity. We can see this in the Penrose diagram: when he accelerates in any direction, he will actually decrease the distance needed to reach the singularity. When you hit the singularity, time ends, and there is no future. An immortal being like Connor would never continue his endless journey, and his time would end with nothing he could do to change that.</p>
         </div>
         <div>
           <div class="img-slot img-4-3">
@@ -1396,7 +1252,6 @@
     </div>
   </section>
 
-  <!-- SPECTRUM BREAK -->
   <section class="bg-black tight">
     <div class="wrap reveal">
       <span class="overline">Beyond the Horizon</span>
@@ -1405,14 +1260,13 @@
     </div>
   </section>
 
-   <!-- White holes and alternate universe -->
   <section class="bg-ink">
     <div class="wrap">
       <span class="overline">White Holes and Alternate Universes</span>
       <div class="row row-rev reveal">
         <div>
           <span class="kicker">Beyond the horizon</span>
-          <h2 style="font-size:clamp(2.5rem,5vw,4.5rem);margin-bottom:1rem">White holes & alternate universes</h2>
+          <h2 style="font-size:clamp(2.5rem,5vw,4.5rem);margin-bottom:1rem">White holes &amp; alternate universes</h2>
           <p class="body-lg">Let's go back a bit, when Connor was about to cross the event horizon. He could still send and receive signals from the universe until he entered, when no signals could be sent from him, but he could still receive them. This is determined from his light cone. If you position Connor across the Penrose diagram, you can find what he can receive and give signals to, with his two light cones. But what if we place him at zero (or the bottom of the black hole part)? All he could receive from is that empty space below. This is where white holes come in.</p>
           <p class="body-lg" style="margin-top:1rem">Below the black hole would be a white hole. A point that nothing could enter and would have an intense push, almost like a mountain warp in space-time. This point would be superheated and would be constantly expelling light and gases. Inside a white hole, you could not see the universes outside, and could not predict the future. Now, white holes break certain laws, but it is believed that we do not know enough about this.</p>
           <p class="body-lg" style="margin-top:1rem">So now that we have gotten two points that can warp space-time, what else is there to add to this diagram? Well, if you fully solve Einstein's equations, you get two full spaces, two universes. This is represented in this diagram in the empty space on the left side. By now, our graph looks a bit like this.</p>
@@ -1440,7 +1294,6 @@
     </div>
   </section>
 
-   <!-- Worm Holes -->
   <section class="bg-black">
     <div class="wrap">
       <span class="overline">Wormholes</span>
@@ -1450,9 +1303,9 @@
           <h2 style="font-size:clamp(2.5rem,5vw,4.5rem);margin-bottom:1rem">Einstein-Rosen bridges</h2>
           <p class="body-lg">Wormholes appear in the Schwarzschild extension as connections between two universes. In the Penrose diagram, the two corners of separate universes touch across the bridge.</p>
           <p class="body-lg" style="margin-top:1rem">A static Schwarzschild wormhole is unstable. Any matter entering it is destined to hit the singularity before it can pass through, so it is not a viable travel route in this idealized case.</p>
-          <p class="body-lg" style="margin-top:1rem">But how do we get to this new universe? Well, thats where Einstein-Rosen bridges come in. These bridges between universes are more commonly known as wormholes. You see that right in the middle of the graph, you have the two corners of universes touching each other? That is where the wormhole lives on our diagram. Unlike Lorentzian wormholes, Einstein-Rosen bridges are unstable connections between universes living inside black holes. But if we can access them in black holes, why can we not travel to another universe? Well, if you look at the Penrose diagram, you will see that the light cone can never reach it from any point in our universe. This is because, as you enter a wormhole, the passage elongates, getting more and more stretched out, until it cuts off, revealing a singularity. This means that to travel through a wormhole, you would have to go faster than light.</p>
-          <p class="body-lg" style="margin-top:1rem">So you can’t go to the universe because you can’t go faster than light. But even if you can’t travel to the other universe, it doesn’t mean that a black hole is not a connection point between these universes, meaning it is totally reasonable to meet in a black hole, if you are fine with the impending doom of the singularity.</p>
-          <p class="body-lg" style="margin-top:1rem">You could meet people from other universes, and white holes and worm holes are things, but what if there was another way to visit a universe? Most black holes are not Stable and non-rotating Schwarzschild black holes like we just described. Black holes are mainly Kerr black holes, or spinning black holes, which leads us into our next topic.</p>
+          <p class="body-lg" style="margin-top:1rem">But how do we get to this new universe? Well, that's where Einstein-Rosen bridges come in. These bridges between universes are more commonly known as wormholes. You see that right in the middle of the graph, you have the two corners of universes touching each other? That is where the wormhole lives on our diagram. Unlike Lorentzian wormholes, Einstein-Rosen bridges are unstable connections between universes living inside black holes. But if we can access them in black holes, why can we not travel to another universe? Well, if you look at the Penrose diagram, you will see that the light cone can never reach it from any point in our universe. This is because, as you enter a wormhole, the passage elongates, getting more and more stretched out, until it cuts off, revealing a singularity. This means that to travel through a wormhole, you would have to go faster than light.</p>
+          <p class="body-lg" style="margin-top:1rem">So you can't go to the universe because you can't go faster than light. But even if you can't travel to the other universe, it doesn't mean that a black hole is not a connection point between these universes, meaning it is totally reasonable to meet in a black hole, if you are fine with the impending doom of the singularity.</p>
+          <p class="body-lg" style="margin-top:1rem">You could meet people from other universes, and white holes and worm holes are things, but what if there was another way to visit a universe? Most black holes are not stable and non-rotating Schwarzschild black holes like we just described. Black holes are mainly Kerr black holes, or spinning black holes, which leads us into our next topic.</p>
           <blockquote style="margin-top:1.5rem">
             Wormholes connect distant parts of spacetime, potentially allowing shortcuts through the universe.
             <cite>— Einstein-Rosen Bridge</cite>
@@ -1481,17 +1334,18 @@
     <div class="wrap">
       <div class="footer-inner">
         <div class="footer-logo">RAD <em>R</em>ELATIVITY</div>
-                <ul class="footer-nav">
+        <ul class="footer-nav">
           <li><button onclick="go('home')">Home</button></li>
           <li><button onclick="go('rele')">Relativity</button></li>
           <li><button onclick="go('his')">History</button></li>
-          <li><button onclick="go('types')">Types</button></li>
+          <li><button onclick="go('types')">Non-Rotating BH</button></li>
           <li><button onclick="go('learn')">Rotating BH</button></li>
+          <li><button onclick="go('problems')">Problems</button></li>
           <li><button onclick="go('data')">Data</button></li>
         </ul>
       </div>
       <div class="footer-bottom">
-        <span class="footer-copy">© 2026 RAD RELATIVITY — Black Hole Research</span>
+        <span class="footer-copy">© 2026 RAD RELATIVITY</span>
         <div class="spec-line spec-line-footer"></div>
       </div>
     </div>
@@ -1501,19 +1355,18 @@
 
 
 <!-- ═══════════════════════════════════════════════════════════════
-     Rotating black holes
+     ROTATING BLACK HOLES
 ═══════════════════════════════════════════════════════════════ -->
 <div id="page-learn" class="page">
 
   <div class="pg-header bg-ink">
     <div class="wrap">
-      <p class="trail">Rad Relativity <span>Learn</span></p>
-      <h1>The pregnant <br>BLACK HOLE</h1>
+      <p class="trail">Rad Relativity <span>Rotating Black Holes</span></p>
+      <h1>The spinning<br>BLACK HOLE</h1>
       <p>A comprehensive guide to Kerr black holes — the rotating solution that describes real stellar black holes, and the exotic physics that occurs within them.</p>
     </div>
   </div>
 
-  <!-- KERR VS SCHWARZSCHILD INTRO -->
   <section class="bg-ink">
     <div class="wrap reveal">
       <span class="kicker">The difference that changed everything</span>
@@ -1537,13 +1390,11 @@
     </div>
   </section>
 
-  <!-- THE THREE REGIONS -->
   <section class="bg-black">
     <div class="wrap reveal">
       <span class="kicker">The interior architecture</span>
       <h2 style="font-size:clamp(2.5rem,5vw,4rem);margin-bottom:1.5rem">THE THREE<br>HORIZONS OF<br>A KERR BLACK HOLE</h2>
-      <p style="margin-bottom:2.5rem;max-width:560px">Unlike a Schwarzschild black hole, which is spherically symmetric with a single event horizon, a Kerr black hole has three distinct regions. The geometry bulges at the equator due to the spin, and the interior structure is radically different. Here are the three main sections you would encounter falling into a Kerr black hole:</p>
-      
+      <p style="margin-bottom:2.5rem;max-width:560px">Unlike a Schwarzschild black hole, which is spherically symmetric with a single event horizon, a Kerr black hole has three distinct regions. The geometry bulges at the equator due to the spin, and the interior structure is radically different.</p>
       <div class="row" style="gap:3rem">
         <div>
           <h3 style="font-family:var(--display);font-size:1.8rem;letter-spacing:.04em;margin-bottom:1rem;color:var(--orange)">The Ergosphere</h3>
@@ -1567,7 +1418,6 @@
     </div>
   </section>
 
-  <!-- THE RING SINGULARITY -->
   <section class="bg-ink">
     <div class="wrap reveal">
       <span class="overline">The centre of rotation</span>
@@ -1590,22 +1440,20 @@
         </div>
         <div>
           <div class="img-slot img-4-3">
-            <span class="img-label">Replace with image — 4:3</span>
-            <span class="img-hint">e.g. EHT image, artist render, accretion disk</span>
+            <span class="img-label">Ring singularity — 4:3</span>
+            <span class="img-hint">Diagram of Kerr ring singularity and inner horizon</span>
           </div>
-          <p class="img-caption">Figure 1 — Caption text goes here.</p>
+          <p class="img-caption">Figure — The Kerr ring singularity.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- THE EXOTIC INTERIOR -->
   <section class="bg-black">
     <div class="wrap reveal">
       <span class="overline">Beyond the inner horizon</span>
       <h2 style="font-size:clamp(2.5rem,5vw,4rem);margin-bottom:1.5rem">INFINITE UNIVERSES<br>AND ANTIVERSES</h2>
       <p style="margin-bottom:2.5rem;max-width:560px">The Kerr black hole's interior geometry suggests something almost unbelievable — the existence of regions that might connect to other universes or even to anti-universes where gravity acts in reverse.</p>
-      
       <div class="row" style="gap:3rem">
         <div>
           <h3 style="font-family:var(--display);font-size:1.6rem;letter-spacing:.04em;margin-bottom:1rem">Multiple Universes</h3>
@@ -1624,20 +1472,16 @@
         </div>
         <div>
           <div class="img-slot img-4-3">
-            <span class="img-label">Replace with image — 4:3</span>
-            <span class="img-hint">e.g. EHT image, artist render, accretion disk</span>
+            <span class="img-label">Kerr interior — 4:3</span>
+            <span class="img-hint">Penrose diagram of Kerr spacetime showing multiple universes</span>
           </div>
-          <p class="img-caption">Figure 1 — Caption text goes here.</p>
+          <p class="img-caption">Figure — Kerr interior structure.</p>
         </div>
       </div>
     </div>
   </section>
 
-
-  <!-- ═══════════════════════════════════════════════════════════════
-       WHITE SECTION — THE KERR SOLUTION
-       Pure white with neon highlights, smooth gradient transition
-  ═══════════════════════════════════════════════════════════════ -->
+  <!-- WHITE SECTION — THE KERR SOLUTION -->
   <div class="white-section">
     <div class="white-inner reveal">
 
@@ -1680,33 +1524,7 @@
     </div>
   </div>
 
-  <footer>
-    <div class="wrap">
-      <div class="footer-inner">
-        <div class="footer-logo">RAD <em>R</em>ELATIVITY</div>
-                <ul class="footer-nav">
-          <li><button onclick="go('home')">Home</button></li>
-          <li><button onclick="go('rele')">Relativity</button></li>
-          <li><button onclick="go('his')">History</button></li>
-          <li><button onclick="go('types')">Types</button></li>
-          <li><button onclick="go('learn')">Rotating BH</button></li>
-          <li><button onclick="go('data')">Data</button></li>
-        </ul>
-      </div>
-      <div class="footer-bottom">
-        <span class="footer-copy">© 2026 RAD RELATIVITY — Black Hole Research</span>
-        <div class="spec-line spec-line-footer"></div>
-      </div>
-    </div>
-  </footer>
-
-</div><!-- /learn -->
-
-
-  <!-- ═══════════════════════════════════════════════════════════════
-       WHITE SECTION — THE HOLE
-       Pure white with neon highlights, smooth gradient transition
-  ═══════════════════════════════════════════════════════════════ -->
+  <!-- WHITE SECTION — THE HOLE -->
   <div class="white-section">
     <div class="white-inner reveal">
 
@@ -1757,17 +1575,18 @@
     <div class="wrap">
       <div class="footer-inner">
         <div class="footer-logo">RAD <em>R</em>ELATIVITY</div>
-                <ul class="footer-nav">
+        <ul class="footer-nav">
           <li><button onclick="go('home')">Home</button></li>
           <li><button onclick="go('rele')">Relativity</button></li>
           <li><button onclick="go('his')">History</button></li>
-          <li><button onclick="go('types')">Types</button></li>
+          <li><button onclick="go('types')">Non-Rotating BH</button></li>
           <li><button onclick="go('learn')">Rotating BH</button></li>
+          <li><button onclick="go('problems')">Problems</button></li>
           <li><button onclick="go('data')">Data</button></li>
         </ul>
       </div>
       <div class="footer-bottom">
-        <span class="footer-copy">© 2026 RAD RELATIVITY — Black Hole Research</span>
+        <span class="footer-copy">© 2026 RAD RELATIVITY</span>
         <div class="spec-line spec-line-footer"></div>
       </div>
     </div>
@@ -1859,85 +1678,40 @@
         </div>
       </div>
 
-      <!-- ═══════════════════════════════════════════════════════════
-           KEY EQUATIONS — rendered with KaTeX
-           To add more: copy a .katex-display block and write LaTeX
-           between $$ ... $$ delimiters.
-      ═══════════════════════════════════════════════════════════ -->
       <div class="reveal" style="margin-top:5rem">
         <span class="kicker">Key equations</span>
         <h3 style="font-family:var(--display);font-size:2rem;letter-spacing:.04em;margin-bottom:.5rem">THE MATHS<br>OF BLACK HOLES</h3>
-        <p style="margin-bottom:2.5rem;max-width:560px">The equations that govern black holes, rendered in full. Hover any inline equation to see it in context. All notation follows standard relativistic conventions where $c = G = 1$ unless stated.</p>
+        <p style="margin-bottom:2.5rem;max-width:560px">The equations that govern black holes, rendered in full. All notation follows standard relativistic conventions where $c = G = 1$ unless stated.</p>
 
-        <!-- SCHWARZSCHILD RADIUS -->
         $$r_s = \frac{2GM}{c^2}$$
-        <div class="eq-row">
-          <span class="eq-num">Eq. 1</span>
-          <span class="eq-label">Schwarzschild radius — the radius of the event horizon for a non-rotating black hole of mass $M$</span>
-        </div>
+        <div class="eq-row"><span class="eq-num">Eq. 1</span><span class="eq-label">Schwarzschild radius — the radius of the event horizon for a non-rotating black hole of mass $M$</span></div>
 
-        <!-- EINSTEIN FIELD EQUATIONS -->
         $$G_{\mu\nu} + \Lambda g_{\mu\nu} = \frac{8\pi G}{c^4}\, T_{\mu\nu}$$
-        <div class="eq-row">
-          <span class="eq-num">Eq. 2</span>
-          <span class="eq-label">Einstein field equations — $G_{\mu\nu}$ is the Einstein tensor describing spacetime curvature, $T_{\mu\nu}$ is the stress-energy tensor, $\Lambda$ is the cosmological constant</span>
-        </div>
+        <div class="eq-row"><span class="eq-num">Eq. 2</span><span class="eq-label">Einstein field equations — $G_{\mu\nu}$ is the Einstein tensor, $T_{\mu\nu}$ is the stress-energy tensor, $\Lambda$ is the cosmological constant</span></div>
 
-        <!-- SCHWARZSCHILD METRIC -->
         $$ds^2 = -\!\left(1 - \frac{r_s}{r}\right)c^2\,dt^2 + \left(1 - \frac{r_s}{r}\right)^{-1}\!dr^2 + r^2 d\Omega^2$$
-        <div class="eq-row">
-          <span class="eq-num">Eq. 3</span>
-          <span class="eq-label">Schwarzschild metric — describes spacetime geometry outside a spherically symmetric, non-rotating black hole. $d\Omega^2 = d\theta^2 + \sin^2\!\theta\, d\phi^2$ is the solid angle element</span>
-        </div>
+        <div class="eq-row"><span class="eq-num">Eq. 3</span><span class="eq-label">Schwarzschild metric — spacetime geometry outside a spherically symmetric, non-rotating black hole</span></div>
 
-        <!-- HAWKING TEMPERATURE -->
         $$T_H = \frac{\hbar\, c^3}{8\pi\, G\, M\, k_B}$$
-        <div class="eq-row">
-          <span class="eq-num">Eq. 4</span>
-          <span class="eq-label">Hawking temperature — the thermal radiation temperature of a black hole of mass $M$. $\hbar$ is the reduced Planck constant, $k_B$ is Boltzmann's constant. Smaller $M$ → higher temperature</span>
-        </div>
+        <div class="eq-row"><span class="eq-num">Eq. 4</span><span class="eq-label">Hawking temperature — thermal radiation temperature of a black hole of mass $M$. Smaller $M$ → higher temperature</span></div>
 
-        <!-- BEKENSTEIN-HAWKING ENTROPY -->
         $$S_{BH} = \frac{k_B\, c^3\, A}{4\, G\, \hbar} = \frac{k_B\, A}{4\, \ell_P^{\,2}}$$
-        <div class="eq-row">
-          <span class="eq-num">Eq. 5</span>
-          <span class="eq-label">Bekenstein–Hawking entropy — black hole entropy is proportional to its horizon area $A$, not volume. $\ell_P = \sqrt{\hbar G / c^3}$ is the Planck length. The holographic principle originates here</span>
-        </div>
+        <div class="eq-row"><span class="eq-num">Eq. 5</span><span class="eq-label">Bekenstein–Hawking entropy — black hole entropy scales with horizon area $A$. The holographic principle originates here</span></div>
 
-        <!-- PHOTON SPHERE -->
         $$r_{ph} = \frac{3GM}{c^2} = \frac{3}{2}\,r_s$$
-        <div class="eq-row">
-          <span class="eq-num">Eq. 6</span>
-          <span class="eq-label">Photon sphere radius — the distance at which gravity is strong enough to force photons into circular orbits. Sits at $1.5\,r_s$. Responsible for the bright ring in black hole images</span>
-        </div>
+        <div class="eq-row"><span class="eq-num">Eq. 6</span><span class="eq-label">Photon sphere radius — where gravity forces photons into circular orbits. Responsible for the bright ring in black hole images</span></div>
 
-        <!-- ISCO -->
         $$r_{ISCO} = \frac{6GM}{c^2} = 3\,r_s \quad \text{(Schwarzschild)}$$
-        <div class="eq-row">
-          <span class="eq-num">Eq. 7</span>
-          <span class="eq-label">Innermost stable circular orbit (ISCO) — the closest stable orbit matter can maintain before inevitably spiralling inward. Marks the inner edge of the accretion disk for a non-rotating black hole</span>
-        </div>
+        <div class="eq-row"><span class="eq-num">Eq. 7</span><span class="eq-label">Innermost stable circular orbit (ISCO) — inner edge of the accretion disk for a non-rotating black hole</span></div>
 
-        <!-- TIDAL FORCE -->
         $$F_{tidal} \approx \frac{2GMd}{r^3}$$
-        <div class="eq-row">
-          <span class="eq-num">Eq. 8</span>
-          <span class="eq-label">Tidal (spaghettification) force — $d$ is the length of the infalling object, $r$ is its distance from the singularity. This grows as $r^{-3}$, becoming infinite at the singularity. For stellar black holes this is lethal well before the horizon</span>
-        </div>
+        <div class="eq-row"><span class="eq-num">Eq. 8</span><span class="eq-label">Tidal (spaghettification) force — grows as $r^{-3}$, becoming infinite at the singularity</span></div>
 
-        <!-- GRAVITATIONAL TIME DILATION -->
         $$\frac{d\tau}{dt} = \sqrt{1 - \frac{r_s}{r}}$$
-        <div class="eq-row">
-          <span class="eq-num">Eq. 9</span>
-          <span class="eq-label">Gravitational time dilation — proper time $d\tau$ experienced by an observer at radius $r$ relative to coordinate time $dt$ of a distant observer. As $r \to r_s$, this ratio $\to 0$: time stops at the event horizon</span>
-        </div>
+        <div class="eq-row"><span class="eq-num">Eq. 9</span><span class="eq-label">Gravitational time dilation — as $r \to r_s$, this ratio $\to 0$: time stops at the event horizon</span></div>
 
-        <!-- KERR METRIC (simplified) -->
         $$a = \frac{J}{Mc} \,, \quad 0 \leq a \leq \frac{GM}{c^2}$$
-        <div class="eq-row">
-          <span class="eq-num">Eq. 10</span>
-          <span class="eq-label">Kerr spin parameter — $J$ is the angular momentum of a rotating black hole. $a = 0$ gives the Schwarzschild solution; $a = GM/c^2$ is the maximally spinning (extremal) Kerr black hole. Real astrophysical black holes have $a \lesssim 0.998\,GM/c^2$</span>
-        </div>
+        <div class="eq-row"><span class="eq-num">Eq. 10</span><span class="eq-label">Kerr spin parameter — $a = 0$ gives Schwarzschild; $a = GM/c^2$ is the maximally spinning Kerr black hole</span></div>
       </div>
 
       <div class="reveal" style="margin-top:5rem">
@@ -1965,17 +1739,18 @@
     <div class="wrap">
       <div class="footer-inner">
         <div class="footer-logo">RAD <em>R</em>ELATIVITY</div>
-                <ul class="footer-nav">
+        <ul class="footer-nav">
           <li><button onclick="go('home')">Home</button></li>
           <li><button onclick="go('rele')">Relativity</button></li>
           <li><button onclick="go('his')">History</button></li>
-          <li><button onclick="go('types')">Types</button></li>
+          <li><button onclick="go('types')">Non-Rotating BH</button></li>
           <li><button onclick="go('learn')">Rotating BH</button></li>
+          <li><button onclick="go('problems')">Problems</button></li>
           <li><button onclick="go('data')">Data</button></li>
         </ul>
       </div>
       <div class="footer-bottom">
-        <span class="footer-copy">© 2026 RAD RELATIVITY — Black Hole Research</span>
+        <span class="footer-copy">© 2026 RAD RELATIVITY</span>
         <div class="spec-line spec-line-footer"></div>
       </div>
     </div>
@@ -1997,7 +1772,6 @@
     </div>
   </div>
 
-  <!-- ETERNAL BLACK HOLES AND WHITE HOLES -->
   <section class="bg-black">
     <div class="wrap reveal">
       <span class="kicker">The static universe assumption</span>
@@ -2025,7 +1799,6 @@
     </div>
   </section>
 
-  <!-- HAWKING RADIATION -->
   <section class="bg-ink">
     <div class="wrap reveal">
       <span class="kicker">Quantum effects near horizons</span>
@@ -2051,7 +1824,6 @@
     </div>
   </section>
 
-  <!-- MASS-INFLATION SINGULARITY -->
   <section class="bg-black">
     <div class="wrap reveal">
       <span class="kicker">The inner horizon instability</span>
@@ -2065,20 +1837,19 @@
       <ul class="dot-list" style="margin-top:1.5rem">
         <li>Infinite blueshifting at Kerr black hole's inner horizon creates infinite energy flux</li>
         <li>Falling observers experience the entire future universe compressed into finite time</li>
-        <li>Mass-inflation singularity (1990, Poisson & Israel) may prevent infinite universes</li>
+        <li>Mass-inflation singularity (1990, Poisson &amp; Israel) may prevent infinite universes</li>
         <li>Makes multiverse scenarios inside black holes improbable but not impossible</li>
       </ul>
     </div>
   </section>
 
-  <!-- WARP DRIVES -->
   <section class="bg-ink">
     <div class="wrap reveal">
       <span class="kicker">Faster-than-light travel</span>
       <h2 style="font-size:clamp(2.5rem,5vw,4rem);margin-bottom:1.5rem">ALCUBIERRE<br>WARP DRIVES</h2>
       <div class="row">
         <div>
-          <p>If wormholes collapse at the speed of light, could we somehow go faster than light to cross them? Well, Alcubierre Warp Drives are a theoretical vehicle that could go faster than light. The way these work is they contract the space-time in front of them and expand the space-time behind it, as shown in the image, creating massive FTL propulsion.</p>
+          <p>If wormholes collapse at the speed of light, could we somehow go faster than light to cross them? Well, Alcubierre Warp Drives are a theoretical vehicle that could go faster than light. The way these work is they contract the space-time in front of them and expand the space-time behind it, creating massive FTL propulsion.</p>
           <p style="margin-top:.75rem">Shifting the space-time around it would mean that it could break free from the speed limit of light and could cross the wormhole. However, to manipulate space-time in this way, you would need negative mass, a feat impossible without manipulating dark energy. The energy required to achieve this is tremendous, as just crossing the Milky Way galaxy would require more energy than how much is in the entire universe.</p>
         </div>
         <div>
@@ -2102,7 +1873,6 @@
     </div>
   </section>
 
-  <!-- STABLE WORMHOLES -->
   <section class="bg-black">
     <div class="wrap reveal">
       <span class="kicker">Exotic matter requirements</span>
@@ -2130,7 +1900,6 @@
     </div>
   </section>
 
-  <!-- CLOSED TIMELIKE CURVES -->
   <section class="bg-ink">
     <div class="wrap reveal">
       <span class="kicker">Time travel paradoxes</span>
@@ -2151,7 +1920,6 @@
     </div>
   </section>
 
-  <!-- TACHYONS -->
   <section class="bg-black">
     <div class="wrap reveal">
       <span class="kicker">Hypothetical faster-than-light particles</span>
@@ -2178,10 +1946,7 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════════════════════
-       WHITE SECTION — THEORETICAL PROBLEMS
-       Pure white with neon highlights, smooth gradient transition
-  ═══════════════════════════════════════════════════════════════ -->
+  <!-- WHITE SECTION — QUANTUM GRAVITY -->
   <div class="white-section">
     <div class="white-inner reveal">
 
@@ -2241,13 +2006,14 @@
           <li><button onclick="go('home')">Home</button></li>
           <li><button onclick="go('rele')">Relativity</button></li>
           <li><button onclick="go('his')">History</button></li>
-          <li><button onclick="go('types')">Types</button></li>
+          <li><button onclick="go('types')">Non-Rotating BH</button></li>
           <li><button onclick="go('learn')">Rotating BH</button></li>
+          <li><button onclick="go('problems')">Problems</button></li>
           <li><button onclick="go('data')">Data</button></li>
         </ul>
       </div>
       <div class="footer-bottom">
-        <span class="footer-copy">© 2026 RAD RELATIVITY — Black Hole Research</span>
+        <span class="footer-copy">© 2026 RAD RELATIVITY</span>
         <div class="spec-line spec-line-footer"></div>
       </div>
     </div>
@@ -2258,7 +2024,6 @@
 
 <!-- ═══════════════════════════════════════════════════════════════
      SECRET SIMULATOR MODAL
-     (type "hole" on the explore page)
 ═══════════════════════════════════════════════════════════════ -->
 <div class="bh-modal-overlay" id="bh-modal">
   <button class="bh-modal-close" onclick="closeSim()">[ ESC to close ]</button>
@@ -2295,10 +2060,7 @@ window.addEventListener('scroll', () => {
   document.querySelector('nav').style.borderBottomColor = window.scrollY > 50 ? 'var(--border-hi)' : 'var(--border)';
 });
 
-/* ── SECRET: type "hole" on explore page ─────────────────
-   Opens a physically accurate Schwarzschild black hole
-   simulation. Not documented anywhere. Shhh.
-─────────────────────────────────────────────────────────── */
+/* ── SECRET: type "hole" on relativity page ──────────────────────────── */
 let currentPage = 'home';
 let typedSeq = '';
 
@@ -2319,7 +2081,6 @@ document.addEventListener('keyup', e => {
 function openSim() {
   const modal = document.getElementById('bh-modal');
   modal.classList.add('open');
-  // small delay so modal renders before we size the canvas
   setTimeout(renderBH, 80);
 }
 
@@ -2327,16 +2088,7 @@ function closeSim() {
   document.getElementById('bh-modal').classList.remove('open');
 }
 
-/* ── REALISTIC SCHWARZSCHILD BLACK HOLE RENDERER ──────────
-   Physics basis:
-   • Shadow radius = 3√3 · GM/c² ≈ 2.6 × r_s
-   • Photon sphere at r = 3GM/c² = 1.5 × r_s
-   • ISCO (innermost stable circular orbit) at 6GM/c² = 3 × r_s
-   • Accretion disk: warm inner edge, cooler outer rim
-   • Doppler beaming: approaching (left) side is ~4× brighter
-   • Far-side disk lensed over the top of the shadow
-   • Background starfield with gravitational lensing distortion
-─────────────────────────────────────────────────────────── */
+/* ── SCHWARZSCHILD BLACK HOLE RENDERER ──────────────────── */
 function renderBH() {
   const canvas = document.getElementById('bh-sim-canvas');
   const W = canvas.offsetWidth;
@@ -2349,33 +2101,25 @@ function renderBH() {
   ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
   const S = Math.min(W, H);
 
-  // Black hole center (slightly left of screen center for realism)
   const cx = W * 0.5;
   const cy = H * 0.5;
 
-  // Physical scale — all in pixel units
-  const M       = S * 0.065;          // mass parameter (rs = 2M)
-  const shadow  = 3 * Math.sqrt(3) * M; // true shadow: 5.196M ≈ 2.6 rs
-  const photon  = 3 * M;              // photon sphere = 3M
-  const isco    = 6 * M;              // ISCO = 6M (disk inner edge)
-  const diskOut = M * 20;             // outer disk edge
-
-  // Disk inclination — viewed from ~20° above equatorial plane
-  // inc=sin(20°)≈0.34 → controls how elliptical disk appears
+  const M       = S * 0.065;
+  const shadow  = 3 * Math.sqrt(3) * M;
+  const photon  = 3 * M;
+  const isco    = 6 * M;
+  const diskOut = M * 20;
   const inc = 0.30;
 
-  // Deterministic RNG for consistent star positions
   function rng(seed) {
     let s = seed;
     return () => { s = (s * 1664525 + 1013904223) & 0xffffffff; return (s >>> 0) / 4294967296; };
   }
   const rand = rng(31415926);
 
-  // ── 1. BLACK BACKGROUND ──
   ctx.fillStyle = '#000';
   ctx.fillRect(0, 0, W, H);
 
-  // ── 2. AMBIENT ACCRETION GLOW (wide, dim) ──
   {
     const g = ctx.createRadialGradient(cx, cy + shadow * 0.6, 0, cx, cy, diskOut * 1.5);
     g.addColorStop(0,   'rgba(255,110,20,.00)');
@@ -2385,7 +2129,6 @@ function renderBH() {
     ctx.fillStyle = g;
     ctx.beginPath(); ctx.arc(cx, cy, diskOut * 1.5, 0, Math.PI * 2); ctx.fill();
 
-    // Doppler lobe — approaching side (left/bottom) is brighter
     const g2 = ctx.createRadialGradient(cx - photon*0.6, cy + photon*0.5, 0, cx, cy, diskOut);
     g2.addColorStop(0,   'rgba(255,180,60,.18)');
     g2.addColorStop(0.25,'rgba(255,130,30,.08)');
@@ -2394,14 +2137,11 @@ function renderBH() {
     ctx.beginPath(); ctx.arc(cx, cy, diskOut, 0, Math.PI * 2); ctx.fill();
   }
 
-  // ── 3. FAR-SIDE DISK (lensed arc above shadow) ──
-  // In real images this appears as a bright arc above the shadow
   ctx.save();
   ctx.translate(cx, cy);
   for (let r = diskOut * 0.9; r >= isco; r -= 1.8) {
     const t = (r - isco) / (diskOut - isco);
     const hot = Math.pow(1 - t, 0.6);
-    // Far side receding → dimmer (Doppler factor ~0.3)
     const a = hot * hot * 0.055;
     const {R,G,B} = diskCol(hot, 0.5);
     ctx.beginPath();
@@ -2412,39 +2152,30 @@ function renderBH() {
   }
   ctx.restore();
 
-  // ── 4. LENSED STARFIELD ──
   for (let i = 0; i < 700; i++) {
     const sx0 = rand() * W, sy0 = rand() * H;
     const dx0 = sx0 - cx, dy0 = sy0 - cy;
     const r0  = Math.sqrt(dx0*dx0 + dy0*dy0);
-    if (r0 < shadow * 1.01) continue; // behind shadow
+    if (r0 < shadow * 1.01) continue;
 
-    // Gravitational lensing: photons appear deflected outward from BH
-    // Deflection angle α ≈ 2rs/b in weak field (rs = 2M)
     const rs = 2 * M;
     const defl = 2 * rs / Math.max(r0, shadow);
     const ang  = Math.atan2(dy0, dx0);
-    // Star appears shifted outward
     const r1  = r0 / (1 - defl * Math.min(1, shadow / r0));
     const sx  = cx + Math.cos(ang) * r1;
     const sy  = cy + Math.sin(ang) * r1;
 
-    // Stars very near shadow get boosted brightness (lensing magnification)
     const mag = 1 + 3 * Math.max(0, 1 - r0 / (shadow * 2));
     const bri = (0.08 + rand() * 0.4) * mag;
     const sz  = 0.3 + rand() * 1.1;
     const warm = rand() > 0.65;
     ctx.beginPath(); ctx.arc(sx, sy, sz, 0, Math.PI * 2);
-    ctx.fillStyle = warm
-      ? `rgba(255,235,180,${bri})`
-      : `rgba(210,220,255,${bri})`;
+    ctx.fillStyle = warm ? `rgba(255,235,180,${bri})` : `rgba(210,220,255,${bri})`;
     ctx.fill();
   }
 
-  // ── 5. NEAR-SIDE DISK (bottom arc — approaching, brighter) ──
   ctx.save();
   ctx.translate(cx, cy);
-  // Clip to lower half only (near side of disk is below equator)
   ctx.beginPath();
   ctx.rect(-diskOut * 1.1, -shadow * 0.3, diskOut * 2.2, diskOut + shadow * 0.3);
   ctx.clip();
@@ -2452,7 +2183,6 @@ function renderBH() {
   for (let r = diskOut; r >= isco; r -= 1.5) {
     const t   = (r - isco) / (diskOut - isco);
     const hot = Math.pow(1 - t, 0.55);
-    // Near side approaching → bright (Doppler factor ~1.8 on left, ~0.6 on right)
     const a = hot * (0.18 + hot * 0.18);
     const {R,G,B} = diskCol(hot, 1.3);
     ctx.beginPath();
@@ -2463,7 +2193,6 @@ function renderBH() {
   }
   ctx.restore();
 
-  // Extra bright spot on left-bottom (Doppler beaming maximum)
   {
     const bx = cx - photon * 0.7, by = cy + photon * 0.55;
     const g3 = ctx.createRadialGradient(bx, by, 0, bx, by, photon * 0.85);
@@ -2475,8 +2204,6 @@ function renderBH() {
     ctx.beginPath(); ctx.arc(bx, by, photon * 0.85, 0, Math.PI * 2); ctx.fill();
   }
 
-  // ── 6. PHOTON RING — bright ring just outside shadow ──
-  // In real images this is the characteristic thin glowing ring
   for (let pass = 0; pass < 4; pass++) {
     const rr = shadow + 2 + pass * 2.5;
     const a  = (0.55 - pass * 0.1) / (1 + pass * 0.3);
@@ -2492,11 +2219,9 @@ function renderBH() {
     ctx.fill('evenodd');
   }
 
-  // ── 7. SHADOW — pure black ──
   ctx.beginPath(); ctx.arc(cx, cy, shadow, 0, Math.PI * 2);
   ctx.fillStyle = '#000'; ctx.fill();
 
-  // Slight warm fringe at shadow edge (photon ring bleeds in slightly)
   const gEdge = ctx.createRadialGradient(cx, cy, shadow * 0.92, cx, cy, shadow * 1.08);
   gEdge.addColorStop(0,   'rgba(0,0,0,0)');
   gEdge.addColorStop(0.6, 'rgba(255,140,30,.06)');
@@ -2506,23 +2231,17 @@ function renderBH() {
   ctx.arc(cx, cy, shadow * 0.92, 0, Math.PI * 2, true);
   ctx.fillStyle = gEdge; ctx.fill('evenodd');
 
-  // ── 8. STATUS LABEL ──
   const lbl = document.getElementById('bh-sim-label');
   lbl.textContent = `Schwarzschild radius: ${(2*M).toFixed(0)}px  ·  Shadow: ${shadow.toFixed(0)}px  ·  Photon sphere: ${photon.toFixed(0)}px  ·  Click canvas or press ESC to close`;
   canvas.onclick = closeSim;
 }
 
-/* Accretion disk temperature → RGB
-   hot=1: inner edge  → white-orange (~10⁷K optical peak)
-   hot=0: outer edge  → deep amber-red (~10⁴K)
-   mult: brightness multiplier                            */
 function diskCol(hot, mult) {
   const R = Math.min(255, Math.round(255 * mult));
   const G = Math.min(255, Math.round((60 + hot * 140) * mult));
   const B = Math.min(255, Math.round(hot * hot * 55 * mult));
   return {R, G, B};
 }
-
 </script>
 </body>
 </html>
